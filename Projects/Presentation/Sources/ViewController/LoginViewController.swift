@@ -9,12 +9,14 @@
 import UIKit
 import SnapKit
 import Then
+import Core
+import MintKit
 
 public class LoginViewController: UIViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .red
+        view.backgroundColor = MintKitAsset.Colors.BKC.color
     }
 }
