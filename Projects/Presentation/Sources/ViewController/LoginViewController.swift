@@ -22,6 +22,12 @@ public class LoginViewController: UIViewController {
     
     private var loginButton = MintButton(buttonTitle: "로그인", titleColor: .white)
     
+    private var paintingLogo = UIImageView().then {
+        $0.image = MintKitAsset.Assets.paintingLogo.image
+        //불투명도 코드
+        $0.layer.opacity = 0.5
+    }
+    
     public override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,7 +41,8 @@ public class LoginViewController: UIViewController {
         [
             mintTitleLogo,
             mintTextField,
-            loginButton
+            loginButton,
+            paintingLogo
         ].forEach { view.addSubview($0) }
         
         mintTitleLogo.snp.makeConstraints {
@@ -56,6 +63,12 @@ public class LoginViewController: UIViewController {
             $0.centerX.equalToSuperview()
             $0.width.equalTo(370.0)
             $0.height.equalTo(54.0)
+        }
+        
+        paintingLogo.snp.makeConstraints {
+            $0.bottom.equalToSuperview().offset(60.0)
+            $0.trailing.equalToSuperview().offset(120.0)
+            $0.height.width.equalTo(306.0)
         }
     }
 }
