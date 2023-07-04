@@ -13,4 +13,11 @@ extension ModuleFactory: ModuleFactoryInterface {
 
         return loginVC
     }
+    
+    public func mainVC() -> Presentation.MainViewController {
+        let mainVC = MainViewController()
+        
+        return mainVC
+    }
+    
 }

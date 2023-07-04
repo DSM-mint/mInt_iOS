@@ -9,6 +9,7 @@ import Foundation
 
 public protocol ModuleFactoryInterface {
     func loginVC() -> LoginViewController
+    func mainVC() -> MainViewController
 //    func signupVC() -> SignupViewController
 //    func tabBarVC() -> TapBarViewController
 //    func companyListVC() -> CompanyListViewController
