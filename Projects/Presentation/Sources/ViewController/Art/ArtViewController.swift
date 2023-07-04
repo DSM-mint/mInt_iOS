@@ -68,9 +68,17 @@ public class ArtViewController: UIViewController {
         theaterView = MintCollectionView(dataSource: dataSource)
         exhibitionView = MintCollectionView(dataSource: dataSource)
         view.backgroundColor = MintKitAsset.Colors.bkc.color
+        
+        navigationController?.navigationBar.isTranslucent = false
+            navigationController?.navigationBar.barTintColor = MintKitAsset.Colors.bkc.color
+            navigationController?.navigationBar.titleTextAttributes = [
+                .foregroundColor: UIColor.white
+            ]
+        
         layout()
         setNav()
     }
+    
     
     func layout() {
         self.view.addSubview(scrollView)
