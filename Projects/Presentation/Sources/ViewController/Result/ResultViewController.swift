@@ -15,6 +15,8 @@ import MintKit
 
 public class ResultViewController: UIViewController {
     
+    var disposeBag = DisposeBag()
+
     private var resultLabel = UILabel().then {
         $0.numberOfLines = 0
         $0.font = .systemFont(ofSize: 20.0, weight: .bold)
@@ -55,6 +57,11 @@ public class ResultViewController: UIViewController {
         view.backgroundColor = MintKitAsset.Colors.bkc.color
         
         layout()
+        
+        consultingButton.rx.tap
+            .subscribe(with: self, onNext: { owner, _ in
+                self.navigationController?.pushViewController(ConsultingWebViewController(), animated: true)
+            }).disposed(by: disposeBag)
     }
     
     func layout() {

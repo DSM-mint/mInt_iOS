@@ -73,6 +73,7 @@ public class LoginViewController: UIViewController {
                 tapbarVC.modalPresentationStyle = .fullScreen
                 self.present(tapbarVC, animated: true)
             }).disposed(by: disposeBag)
+        
     }
     
     private func layout() {
