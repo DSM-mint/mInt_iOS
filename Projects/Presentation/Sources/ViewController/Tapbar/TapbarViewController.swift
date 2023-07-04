@@ -34,7 +34,7 @@ public class TapbarViewController: UITabBarController {
                                           tag: 2)
         diaryVC.tabBarItem = tabTwoBarItem2
         
-        let artVC = UINavigationController(rootViewController: UIViewController())
+        let artVC = UINavigationController(rootViewController: ArtViewController())
         let tabThrBarItem3 = UITabBarItem(title: "",
                                           image: MintKitAsset.Assets.artImage.image,
                                           tag: 3)

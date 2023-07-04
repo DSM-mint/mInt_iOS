@@ -1,14 +1,6 @@
-//
-//  MyCell.swift
-//  MintKit
-//
-//  Created by 박준하 on 2023/07/05.
-//  Copyright © 2023 Mint-iOS. All rights reserved.
-//
-
 import UIKit
 
-class MyCell: UICollectionViewCell {
+open class MyCell: UICollectionViewCell {
 
     static var id: String {
         return NSStringFromClass(Self.self).components(separatedBy: ".").last ?? ""
@@ -18,15 +10,25 @@ class MyCell: UICollectionViewCell {
         didSet { bind() }
     }
 
-    lazy var containerView: UIView = {
-        let view = UIView()
+    public var containerView: UIImageView = {
+        let view = UIImageView()
 
         return view
     }()
 
     lazy var titleLabel: UILabel = {
         let label = UILabel()
-
+        label.textColor = .white
+        label.font = .systemFont(ofSize: 15.0, weight: .bold)
+        
+        return label
+    }()
+    
+    lazy var subLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.font = .systemFont(ofSize: 10.0, weight: .semibold)
+        
         return label
     }()
 
@@ -37,29 +39,35 @@ class MyCell: UICollectionViewCell {
     }
 
     @available(*, unavailable)
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError()
     }
 
     private func setupView() {
-
         contentView.addSubview(containerView)
-        containerView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-        containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-
+        containerView.snp.makeConstraints {
+            $0.edges.equalTo(contentView)
+        }
+        
         titleLabel.text = myModel?.commentString
         containerView.addSubview(titleLabel)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
-        titleLabel.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
+        titleLabel.snp.makeConstraints {
+            $0.centerX.equalTo(containerView.snp.centerX)
+            $0.top.equalToSuperview().offset(162.0)
+        }
+        
+        containerView.addSubview(subLabel)
+        subLabel.snp.makeConstraints {
+            $0.centerX.equalTo(containerView.snp.centerX)
+            $0.top.equalTo(titleLabel.snp.bottom)
+        }
     }
 
     private func bind() {
         containerView.layer.cornerRadius = 16.0
-        containerView.backgroundColor = myModel?.color
+//        containerView.backgroundColor = myModel?.color
+        containerView.image = MintKitAsset.Assets.testImage1.image
+        subLabel.text = "2023.6.12"
         titleLabel.text = myModel?.commentString
     }
 }

@@ -69,6 +69,19 @@ extension MintCollectionView: UICollectionViewDelegate, UICollectionViewDataSour
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyCell.id, for: indexPath)
         if let cell = cell as? MyCell {
             cell.myModel = dataSource[indexPath.item]
+            if indexPath.row == 0 {
+                cell.titleLabel.text = "카더가든 콘서트"
+                cell.containerView.image = MintKitAsset.Assets.testImage1.image
+            } else if indexPath.row == 1 {
+                cell.titleLabel.text = "10cm 콘서트"
+                cell.containerView.image = MintKitAsset.Assets.testImage2.image
+            } else if indexPath.row == 2 {
+                cell.titleLabel.text = "라우브 내한공연"
+                cell.containerView.image = MintKitAsset.Assets.testImage3.image
+            } else if indexPath.row == 3 {
+                cell.titleLabel.text = "찰리푸스 콘서트"
+                cell.containerView.image = MintKitAsset.Assets.testImage4.image
+            }
         }
         return cell
     }

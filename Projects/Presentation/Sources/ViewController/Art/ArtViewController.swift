@@ -28,8 +28,26 @@ public class ArtViewController: UIViewController {
         $0.text = "콘서트"
         $0.font = .systemFont(ofSize: 20.0, weight: .bold)
         $0.textColor = MintKitAsset.Colors.mainColor.color
-        
     }
+    
+    var titleLabel2 = UILabel().then {
+        $0.text = "뮤지컬"
+        $0.font = .systemFont(ofSize: 20.0, weight: .bold)
+        $0.textColor = MintKitAsset.Colors.mainColor.color
+    }
+
+    var titleLabel3 = UILabel().then {
+        $0.text = "연극"
+        $0.font = .systemFont(ofSize: 20.0, weight: .bold)
+        $0.textColor = MintKitAsset.Colors.mainColor.color
+    }
+    
+    var titleLabel4 = UILabel().then {
+        $0.text = "전시"
+        $0.font = .systemFont(ofSize: 20.0, weight: .bold)
+        $0.textColor = MintKitAsset.Colors.mainColor.color
+    }
+    
     let scrollView: UIScrollView = {
       let scrollView = UIScrollView()
       scrollView.backgroundColor = MintKitAsset.Colors.bkc.color
@@ -38,11 +56,17 @@ public class ArtViewController: UIViewController {
     }()
     
     var concertCollectionView: MintCollectionView!
+    var musicalView: MintCollectionView!
+    var theaterView: MintCollectionView!
+    var exhibitionView: MintCollectionView!
     
     public override func viewDidLoad() {
         super.viewDidLoad()
         let dataSource = MyModel.getModified()
         concertCollectionView = MintCollectionView(dataSource: dataSource)
+        musicalView = MintCollectionView(dataSource: dataSource)
+        theaterView = MintCollectionView(dataSource: dataSource)
+        exhibitionView = MintCollectionView(dataSource: dataSource)
         view.backgroundColor = MintKitAsset.Colors.bkc.color
         layout()
         setNav()
@@ -70,7 +94,17 @@ public class ArtViewController: UIViewController {
         
         [
             titleLabel1,
-            concertCollectionView
+            concertCollectionView,
+            
+            titleLabel2,
+            musicalView,
+            
+            titleLabel3,
+            theaterView,
+            
+            titleLabel4,
+            exhibitionView
+            
         ].forEach { stackView.addArrangedSubview($0) }
         
         titleLabel1.snp.makeConstraints {
@@ -81,7 +115,40 @@ public class ArtViewController: UIViewController {
         concertCollectionView!.snp.makeConstraints {
             $0.trailing.leading.equalToSuperview()
             $0.top.equalTo(titleLabel1.snp.bottom)
-            $0.height.equalTo(650.0)
+            $0.height.equalTo(580.0)
+        }
+        
+        titleLabel2.snp.makeConstraints {
+            $0.top.equalTo(concertCollectionView.snp.bottom)
+            $0.leading.equalToSuperview().offset(30.0)
+        }
+        
+        musicalView.snp.makeConstraints {
+            $0.trailing.leading.equalToSuperview()
+            $0.top.equalTo(titleLabel2.snp.bottom)
+            $0.height.equalTo(580.0)
+        }
+        
+        titleLabel3.snp.makeConstraints {
+            $0.top.equalTo(musicalView.snp.bottom)
+            $0.leading.equalToSuperview().offset(30.0)
+        }
+        
+        theaterView.snp.makeConstraints {
+            $0.trailing.leading.equalToSuperview()
+            $0.top.equalTo(titleLabel3.snp.bottom)
+            $0.height.equalTo(580.0)
+        }
+        
+        titleLabel4.snp.makeConstraints {
+            $0.top.equalTo(theaterView.snp.bottom)
+            $0.leading.equalToSuperview().offset(30.0)
+        }
+        
+        exhibitionView.snp.makeConstraints {
+            $0.trailing.leading.equalToSuperview()
+            $0.top.equalTo(titleLabel4.snp.bottom)
+            $0.height.equalTo(580.0)
         }
     }
     
