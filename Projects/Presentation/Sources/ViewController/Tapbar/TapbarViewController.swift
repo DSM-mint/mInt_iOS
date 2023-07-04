@@ -41,7 +41,7 @@ public class TapbarViewController: UITabBarController {
         
         artVC.tabBarItem = tabThrBarItem3
         
-        let userVC = UINavigationController(rootViewController: UIViewController())
+        let userVC = UINavigationController(rootViewController: UserViewController())
         let tabFouBarItem4 = UITabBarItem(title: "",
                                           image: MintKitAsset.Assets.userImage.image,
                                           tag: 4)
