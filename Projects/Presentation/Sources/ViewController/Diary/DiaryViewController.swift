@@ -1,11 +1,3 @@
-//
-//  DiaryViewController.swift
-//  Presentation
-//
-//  Created by 박준하 on 2023/07/04.
-//  Copyright © 2023 Mint-iOS. All rights reserved.
-//
-
 import UIKit
 import SnapKit
 import Then
@@ -55,8 +47,6 @@ public class DiaryViewController: UIViewController {
         $0.layer.cornerRadius = 16.0
     }
     
-    private var 
-
     public override func viewDidLoad() {
         super.viewDidLoad()
         

@@ -7,6 +7,12 @@ public class ModuleFactory {
 }
 
 extension ModuleFactory: ModuleFactoryInterface {
+    public func artVC() -> Presentation.ArtViewController {
+        let artVC = ArtViewController()
+        
+        return artVC
+    }
+    
     public func diaryVC() -> Presentation.DiaryViewController {
         let diaryVC = DiaryViewController()
         
@@ -62,5 +68,7 @@ extension ModuleFactory: ModuleFactoryInterface {
         
         return mainVC
     }
+    
+    
     
 }

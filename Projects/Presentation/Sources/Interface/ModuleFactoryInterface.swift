@@ -10,6 +10,7 @@ public protocol ModuleFactoryInterface {
     func surveyVC() -> SurveyViewController
     func resultVC() -> ResultViewController
     func diaryVC() -> DiaryViewController
+    func artVC() -> ArtViewController
 //    func tabBarVC() -> TapBarViewController
 //    func companyListVC() -> CompanyListViewController
 }
