@@ -24,6 +24,12 @@ public class ArtViewController: UIViewController {
         $0.font = .systemFont(ofSize: 20.0, weight: .bold)
     }
     
+    var titleLabel1 = UILabel().then {
+        $0.text = "콘서트"
+        $0.font = .systemFont(ofSize: 20.0, weight: .bold)
+        $0.textColor = MintKitAsset.Colors.mainColor.color
+        
+    }
     let scrollView: UIScrollView = {
       let scrollView = UIScrollView()
       scrollView.backgroundColor = MintKitAsset.Colors.bkc.color
@@ -63,12 +69,18 @@ public class ArtViewController: UIViewController {
         }
         
         [
+            titleLabel1,
             concertCollectionView
         ].forEach { stackView.addArrangedSubview($0) }
         
+        titleLabel1.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.leading.equalToSuperview().offset(30.0)
+        }
+        
         concertCollectionView!.snp.makeConstraints {
             $0.trailing.leading.equalToSuperview()
-            $0.top.equalToSuperview()
+            $0.top.equalTo(titleLabel1.snp.bottom)
             $0.height.equalTo(650.0)
         }
     }

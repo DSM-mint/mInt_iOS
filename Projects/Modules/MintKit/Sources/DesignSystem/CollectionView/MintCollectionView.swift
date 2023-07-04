@@ -35,14 +35,16 @@ open class MintCollectionView: UIView {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
         collectionView.layer.borderWidth = 1
         collectionView.backgroundColor = MintKitAsset.Colors.bkc.color
-        collectionView.contentInset = UIEdgeInsets(top: 23, left: 10, bottom: 10, right: 10)
+        collectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+
         self.addSubview(collectionView)
 
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor).isActive = true
-        collectionView.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor, constant: 10).isActive = true
-        collectionView.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor, constant: -10).isActive = true
-        collectionView.heightAnchor.constraint(equalToConstant: 550).isActive = true
+        collectionView.snp.makeConstraints {
+            $0.top.equalTo(self.safeAreaLayoutGuide.snp.top)
+            $0.left.equalTo(self.safeAreaLayoutGuide.snp.left).offset(10)
+            $0.right.equalTo(self.safeAreaLayoutGuide.snp.right).offset(-10)
+            $0.height.equalTo(550)
+        }
 
         collectionView.delegate = self
         collectionView.dataSource = self
