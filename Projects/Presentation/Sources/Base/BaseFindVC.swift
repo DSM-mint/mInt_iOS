@@ -33,7 +33,7 @@ public class BaseFindVC: UIViewController {
         view.addSubview(paintingLogo)
         
         mintFindTextField.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(110.0)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(80.0)
             
             $0.leading.equalToSuperview().offset(30.0)
             $0.trailing.equalToSuperview().inset(30.0)

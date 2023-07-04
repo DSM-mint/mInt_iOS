@@ -1,11 +1,3 @@
-//
-//  ResultViewController.swift
-//  Presentation
-//
-//  Created by 박준하 on 2023/07/04.
-//  Copyright © 2023 Mint-iOS. All rights reserved.
-//
-
 import UIKit
 import SnapKit
 import Then
@@ -61,6 +53,11 @@ public class ResultViewController: UIViewController {
         consultingButton.rx.tap
             .subscribe(with: self, onNext: { owner, _ in
                 self.navigationController?.pushViewController(ConsultingWebViewController(), animated: true)
+            }).disposed(by: disposeBag)
+        
+        backButton.rx.tap
+            .subscribe(with: self, onNext: { owner, _ in
+                self.dismiss(animated: true)
             }).disposed(by: disposeBag)
     }
     

@@ -7,6 +7,12 @@ public class ModuleFactory {
 }
 
 extension ModuleFactory: ModuleFactoryInterface {
+    public func diaryVC() -> Presentation.DiaryViewController {
+        let diaryVC = DiaryViewController()
+        
+        return diaryVC
+    }
+    
     public func resultVC() -> Presentation.ResultViewController {
         let resultVC = ResultViewController()
         

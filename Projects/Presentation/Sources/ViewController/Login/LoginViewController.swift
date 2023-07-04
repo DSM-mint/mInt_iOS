@@ -65,6 +65,8 @@ public class LoginViewController: UIViewController {
         signupButton.rx.tap
             .subscribe(with: self, onNext: { owner, _  in
                print("findPasswordButton")
+                self.modalPresentationStyle = .fullScreen
+                self.navigationController?.pushViewController(SignUpViewController(), animated: true)
             }).disposed(by: disposeBag)
         
         loginButton.rx.tap

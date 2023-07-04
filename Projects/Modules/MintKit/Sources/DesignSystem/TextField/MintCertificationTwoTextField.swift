@@ -26,12 +26,12 @@ open class MintCertificationTwoTextField: UIView {
         textField1.frame = CGRect(x: 0, y: 0, width: 220.0, height: 54.0)
         
         button1 = UIButton().then {
-            $0.titleLabel?.text = buttonText
+            $0.setTitle(buttonText, for: .normal)
             $0.backgroundColor = MintKitAsset.Colors.mainColor.color
             $0.frame = CGRect(x: 0, y: 0, width: 72.0, height: 54.0)
             $0.layer.cornerRadius = 8.0
             $0.setTitleColor(buttonTextColor, for: .normal)
-            
+            $0.titleLabel?.font = .systemFont(ofSize: 15.0, weight: .bold)
         }
 
         super.init(frame: .zero)
