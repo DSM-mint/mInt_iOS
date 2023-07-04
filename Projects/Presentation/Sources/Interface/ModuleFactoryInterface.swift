@@ -6,6 +6,7 @@ public protocol ModuleFactoryInterface {
     func findIdVC() -> FindIdViewController
     func findPasswordVC() -> FindPassswordViewController
     func signUpVC() -> SignUpViewController
+    func tapbarVC() -> TapbarViewController
 //    func tabBarVC() -> TapBarViewController
 //    func companyListVC() -> CompanyListViewController
 }
