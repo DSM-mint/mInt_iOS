@@ -58,6 +58,7 @@ class MyCell: UICollectionViewCell {
     }
 
     private func bind() {
+        containerView.layer.cornerRadius = 16.0
         containerView.backgroundColor = myModel?.color
         titleLabel.text = myModel?.commentString
     }
