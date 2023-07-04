@@ -9,7 +9,7 @@ open class BaseNC: UINavigationController {
 
     private var backButtonAppearance: UIBarButtonItemAppearance {
         let backButtonAppearance = UIBarButtonItemAppearance()
-        backButtonAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.black]
+        backButtonAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.white]
         return backButtonAppearance
     }
 
@@ -27,10 +27,10 @@ open class BaseNC: UINavigationController {
     func setNavigationBarAppearance() {
         let appearance = UINavigationBarAppearance()
         let appearance2 = UINavigationBarAppearance()
-        navigationBar.tintColor = UIColor.black
+        navigationBar.tintColor = UIColor.white
         appearance.setBackIndicatorImage(backButtonImage, transitionMaskImage: backButtonImage)
         appearance2.setBackIndicatorImage(backButtonImage, transitionMaskImage: backButtonImage)
-        appearance.backgroundColor = UIColor.black
+        appearance.backgroundColor = UIColor.white
 
         appearance.configureWithTransparentBackground()
         appearance2.configureWithDefaultBackground()

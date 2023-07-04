@@ -7,6 +7,11 @@ public class ModuleFactory {
 }
 
 extension ModuleFactory: ModuleFactoryInterface {
+    public func surveyVC() -> Presentation.SurveyViewController {
+        let surveryVC = SurveyViewController()
+        
+        return surveryVC
+    }
     
     public func tapbarVC() -> Presentation.TapbarViewController {
         let tapbarVC = TapbarViewController()
