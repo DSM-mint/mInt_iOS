@@ -8,6 +8,12 @@ public class ModuleFactory {
 
 extension ModuleFactory: ModuleFactoryInterface {
     
+    public func signUpVC() -> Presentation.SignUpViewController {
+        let signupVC = SignUpViewController()
+        
+        return signupVC
+    }
+    
     public func findPasswordVC() -> Presentation.FindPassswordViewController {
         let findPassswordVC = FindPassswordViewController()
         

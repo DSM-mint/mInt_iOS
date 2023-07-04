@@ -14,7 +14,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = scene
         
         let moduleFactory = ModuleFactory.shared
-        let rootViewController = moduleFactory.loginVC()
+        let rootViewController = moduleFactory.signUpVC()
 
         window?.rootViewController = BaseNC(rootViewController: rootViewController)
         window?.makeKeyAndVisible()
