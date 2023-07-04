@@ -8,6 +8,8 @@ import RxCocoa
 
 public class UserViewController: UIViewController {
     
+    var disposeBag = DisposeBag()
+    
     lazy var navLabel = UILabel().then {
         $0.textColor = UIColor.white
         $0.text = "마이페이지"
@@ -55,6 +57,12 @@ public class UserViewController: UIViewController {
         layout()
         
         userImageView.layer.cornerRadius = 10.0
+        
+        sadButton.rx.tap
+            .subscribe(with: self, onNext: { owner, _ in
+                print("findIdButton")
+                self.navigationController?.pushViewController(SurveyViewController(), animated: true)
+            }).disposed(by: disposeBag)
     }
     
     func setupNev() {

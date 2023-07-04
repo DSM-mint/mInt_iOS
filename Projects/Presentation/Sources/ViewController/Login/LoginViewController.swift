@@ -52,19 +52,26 @@ public class LoginViewController: UIViewController {
         findIdButton.rx.tap
             .subscribe(with: self, onNext: { owner, _  in
                print("findIdButton")
-                self.present(FindIdViewController(), animated: true)
+                self.navigationController?.pushViewController(FindIdViewController(), animated: true)
             }).disposed(by: disposeBag)
         
         findPasswordButton.rx.tap
             .subscribe(with: self, onNext: { owner, _  in
                print("findPasswordButton")
                 self.modalPresentationStyle = .fullScreen
-                self.navigationController?.present(FindPassswordViewController(), animated: true)
+                self.navigationController?.pushViewController(FindPassswordViewController(), animated: true)
             }).disposed(by: disposeBag)
         
         signupButton.rx.tap
             .subscribe(with: self, onNext: { owner, _  in
                print("findPasswordButton")
+            }).disposed(by: disposeBag)
+        
+        loginButton.rx.tap
+            .subscribe(with: self, onNext: { owner, _ in
+                let tapbarVC = TapbarViewController()
+                tapbarVC.modalPresentationStyle = .fullScreen
+                self.present(tapbarVC, animated: true)
             }).disposed(by: disposeBag)
     }
     
