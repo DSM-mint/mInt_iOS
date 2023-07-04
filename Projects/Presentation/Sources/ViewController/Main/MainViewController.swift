@@ -15,10 +15,18 @@ public class MainViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupNev()
+        setup()
+    }
+    
+    func setup() {
+        view.backgroundColor = MintKitAsset.Colors.bkc.color
+    }
+    
+    func setupNev() {
         let image = MintKitAsset.Assets.mintLogo.image
         
         let resizedImage = image.resized(toWidth: 73, height: 28)
-                
         let button = UIButton(type: .custom)
         button.setImage(resizedImage, for: .normal)
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
@@ -27,8 +35,6 @@ public class MainViewController: UIViewController {
         let barButtonItem = UIBarButtonItem(customView: button)
         
         navigationItem.leftBarButtonItem = barButtonItem
-        
-        view.backgroundColor = MintKitAsset.Colors.bkc.color
     }
     
     @objc func buttonTapped() {

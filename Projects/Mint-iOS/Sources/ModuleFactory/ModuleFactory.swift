@@ -27,13 +27,7 @@ extension ModuleFactory: ModuleFactoryInterface {
 
         return loginVC
     }
-    
-    public func signupVC() -> Presentation.BaseFindVC {
-        let signupVC = BaseFindVC()
-        
-        return signupVC
-    }
-    
+
     public func mainVC() -> Presentation.MainViewController {
         let mainVC = MainViewController()
         
