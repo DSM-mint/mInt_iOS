@@ -3,8 +3,12 @@ import SnapKit
 import Then
 import Core
 import MintKit
+import RxSwift
+import RxCocoa
 
 public class LoginViewController: UIViewController {
+    
+    var disposeBag = DisposeBag()
     
     private var mintTitleLogo = UIImageView().then {
         $0.image = MintKitAsset.Assets.mintLogo.image
@@ -20,12 +24,48 @@ public class LoginViewController: UIViewController {
         $0.layer.opacity = 0.5
     }
     
+    private var findIdButton = UIButton().then {
+        $0.setTitle("아이디 찾기", for: .normal)
+        $0.setTitleColor(MintKitAsset.Colors.gary500.color, for: .normal)
+        $0.titleLabel?.font = .systemFont(ofSize: 15.0)
+    }
+    
+    private var findPasswordButton = UIButton().then {
+        $0.setTitle("비밀번호 찾기", for: .normal)
+        $0.setTitleColor(MintKitAsset.Colors.gary500.color, for: .normal)
+        $0.titleLabel?.font = .systemFont(ofSize: 15.0)
+    }
+    
+    private var signupButton = UIButton().then {
+        $0.setTitle("회원가입", for: .normal)
+        $0.setTitleColor(MintKitAsset.Colors.gary500.color, for: .normal)
+        $0.titleLabel?.font = .systemFont(ofSize: 15.0)
+    }
+    
     public override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = MintKitAsset.Colors.bkc.color
         print("시작됨")
         layout()
+        
+        findIdButton.rx.tap
+            .subscribe(with: self, onNext: { owner, _  in
+               print("findIdButton")
+                self.present(FindIdViewController(), animated: true)
+            }).disposed(by: disposeBag)
+        
+        findPasswordButton.rx.tap
+            .subscribe(with: self, onNext: { owner, _  in
+               print("findPasswordButton")
+                self.modalPresentationStyle = .fullScreen
+                self.navigationController?.present(FindPassswordViewController(), animated: true)
+            }).disposed(by: disposeBag)
+        
+        signupButton.rx.tap
+            .subscribe(with: self, onNext: { owner, _  in
+               print("findPasswordButton")
+            }).disposed(by: disposeBag)
     }
     
     private func layout() {
@@ -34,6 +74,9 @@ public class LoginViewController: UIViewController {
             mintTitleLogo,
             mintTextField,
             loginButton,
+            findIdButton,
+            findPasswordButton,
+            signupButton,
             paintingLogo
         ].forEach { view.addSubview($0) }
         
@@ -57,9 +100,26 @@ public class LoginViewController: UIViewController {
             $0.height.equalTo(54.0)
         }
         
+        findIdButton.snp.makeConstraints {
+            $0.top.equalTo(loginButton.snp.bottom).offset(10.0)
+            $0.leading.equalTo(loginButton.snp.leading).offset(46.0)
+            $0.height.equalTo(22.0)
+        }
+        
+        findPasswordButton.snp.makeConstraints {
+            $0.top.equalTo(loginButton.snp.bottom).offset(6.0)
+            $0.leading.equalTo(findIdButton.snp.trailing).offset(36.0)
+        }
+        
+        signupButton.snp.makeConstraints {
+            $0.top.equalTo(loginButton.snp.bottom).offset(6.0)
+            $0.leading.equalTo(findPasswordButton.snp.trailing).offset(36.0)
+        }
+        
         paintingLogo.snp.makeConstraints {
             $0.bottom.equalToSuperview().offset(60.0)
             $0.trailing.equalToSuperview().offset(120.0)
+            
             $0.height.width.equalTo(306.0)
         }
     }
