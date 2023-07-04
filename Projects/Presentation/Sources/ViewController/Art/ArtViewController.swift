@@ -24,6 +24,13 @@ public class ArtViewController: UIViewController {
         $0.font = .systemFont(ofSize: 20.0, weight: .bold)
     }
     
+    let scrollView: UIScrollView = {
+      let scrollView = UIScrollView()
+      scrollView.backgroundColor = MintKitAsset.Colors.bkc.color
+      scrollView.translatesAutoresizingMaskIntoConstraints = false
+      return scrollView
+    }()
+    
     var concertCollectionView: MintCollectionView!
     
     public override func viewDidLoad() {
@@ -36,9 +43,28 @@ public class ArtViewController: UIViewController {
     }
     
     func layout() {
+        self.view.addSubview(scrollView)
+        scrollView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 16
+        scrollView.addSubview(stackView)
+        
+        stackView.snp.makeConstraints {
+            $0.top.equalTo(scrollView).offset(25.0)
+            $0.bottom.equalTo(scrollView).offset(-25.0)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview()
+            $0.width.equalTo(scrollView)
+            $0.centerX.equalTo(scrollView)
+        }
+        
         [
             concertCollectionView
-        ].forEach { view.addSubview($0) }
+        ].forEach { stackView.addArrangedSubview($0) }
         
         concertCollectionView!.snp.makeConstraints {
             $0.trailing.leading.equalToSuperview()
