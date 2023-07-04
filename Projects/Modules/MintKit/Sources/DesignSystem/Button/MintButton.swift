@@ -27,7 +27,7 @@ open class MintButton: UIButton {
     }
     
     open func configureUI() {
-        titleLabel?.font = .systemFont(ofSize: 20.0, weight: .bold)
+        titleLabel?.font = .systemFont(ofSize: 15.0, weight: .bold)
         setTitleColor(.white, for: .normal)
     }
 }
