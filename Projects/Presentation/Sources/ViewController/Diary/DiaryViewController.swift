@@ -8,7 +8,7 @@ import RxCocoa
 
 @available(iOS 16.0, *)
 public class DiaryViewController: UIViewController {
-
+    
     var disposeBag = DisposeBag()
     
     lazy var navLabel = UILabel().then {
@@ -22,25 +22,27 @@ public class DiaryViewController: UIViewController {
         $0.font = .systemFont(ofSize: 20.0, weight: .bold)
         let string = "박준하 님의 기분을 기록해보세요."
         let attributedString = NSMutableAttributedString(string: string)
-
+        
         if let nameRange = string.range(of: "박준하") {
             let nsRange = NSRange(nameRange, in: string)
             attributedString.addAttribute(.foregroundColor, value: MintKitAsset.Colors.mainColor.color, range: nsRange)
         }
-
+        
         if let otherTextRange = string.range(of: " 님의 기분을 기록해보세요.") {
             let nsRange = NSRange(otherTextRange, in: string)
             attributedString.addAttribute(.foregroundColor, value: UIColor.white, range: nsRange)
         }
-
+        
         $0.attributedText = attributedString
     }
     
     let scrollView: UIScrollView = {
-      let scrollView = UIScrollView()
-      scrollView.backgroundColor = MintKitAsset.Colors.bkc.color
-      scrollView.translatesAutoresizingMaskIntoConstraints = false
-      return scrollView
+        let scrollView = UIScrollView()
+        scrollView.backgroundColor = MintKitAsset.Colors.bkc.color
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsHorizontalScrollIndicator = false
+        return scrollView
     }()
     
     private var calendarView = CalendarView()
@@ -54,14 +56,14 @@ public class DiaryViewController: UIViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(buttonDidTap))
         navigationItem.rightBarButtonItem?.tintColor = MintKitAsset.Colors.mainColor.color
-
+        
         layout()
         
         navigationController?.navigationBar.isTranslucent = false
-            navigationController?.navigationBar.barTintColor = MintKitAsset.Colors.bkc.color
-            navigationController?.navigationBar.titleTextAttributes = [
-                .foregroundColor: UIColor.white
-            ]
+        navigationController?.navigationBar.barTintColor = MintKitAsset.Colors.bkc.color
+        navigationController?.navigationBar.titleTextAttributes = [
+            .foregroundColor: UIColor.white
+        ]
     }
     
     @objc func buttonDidTap() {
@@ -80,7 +82,7 @@ public class DiaryViewController: UIViewController {
     func layout() {
         
         self.view.addSubview(scrollView)
-
+        
         scrollView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
@@ -89,7 +91,7 @@ public class DiaryViewController: UIViewController {
         stackView.axis = .vertical
         stackView.spacing = 16
         scrollView.addSubview(stackView)
-
+        
         stackView.snp.makeConstraints {
             $0.top.equalTo(scrollView).offset(25.0)
             $0.bottom.equalTo(scrollView).offset(-25.0)
@@ -117,6 +119,6 @@ public class DiaryViewController: UIViewController {
         }
     }
     public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
-            self.view.endEditing(true)
-   }
+        self.view.endEditing(true)
+    }
 }

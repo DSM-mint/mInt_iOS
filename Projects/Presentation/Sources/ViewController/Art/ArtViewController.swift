@@ -30,17 +30,17 @@ public class ArtViewController: UIViewController {
         $0.font = .systemFont(ofSize: 20.0, weight: .bold)
         let string = "박준하 님,\n이런 경험은 어떠세요?"
         let attributedString = NSMutableAttributedString(string: string)
-
+        
         if let nameRange = string.range(of: "박준하") {
             let nsRange = NSRange(nameRange, in: string)
             attributedString.addAttribute(.foregroundColor, value: MintKitAsset.Colors.mainColor.color, range: nsRange)
         }
-
+        
         if let otherTextRange = string.range(of: " 님,\n이런 경험은 어떠세요?") {
             let nsRange = NSRange(otherTextRange, in: string)
             attributedString.addAttribute(.foregroundColor, value: UIColor.white, range: nsRange)
         }
-
+        
         $0.attributedText = attributedString
     }
     
@@ -55,7 +55,7 @@ public class ArtViewController: UIViewController {
         $0.font = .systemFont(ofSize: 20.0, weight: .bold)
         $0.textColor = MintKitAsset.Colors.mainColor.color
     }
-
+    
     var titleLabel3 = UILabel().then {
         $0.text = "연극"
         $0.font = .systemFont(ofSize: 20.0, weight: .bold)
@@ -69,10 +69,12 @@ public class ArtViewController: UIViewController {
     }
     
     let scrollView: UIScrollView = {
-      let scrollView = UIScrollView()
-      scrollView.backgroundColor = MintKitAsset.Colors.bkc.color
-      scrollView.translatesAutoresizingMaskIntoConstraints = false
-      return scrollView
+        let scrollView = UIScrollView()
+        scrollView.backgroundColor = MintKitAsset.Colors.bkc.color
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsHorizontalScrollIndicator = false
+        return scrollView
     }()
     
     var concertCollectionView: MintCollectionView!
@@ -96,10 +98,10 @@ public class ArtViewController: UIViewController {
         view.backgroundColor = MintKitAsset.Colors.bkc.color
         
         navigationController?.navigationBar.isTranslucent = false
-            navigationController?.navigationBar.barTintColor = MintKitAsset.Colors.bkc.color
-            navigationController?.navigationBar.titleTextAttributes = [
-                .foregroundColor: UIColor.white
-            ]
+        navigationController?.navigationBar.barTintColor = MintKitAsset.Colors.bkc.color
+        navigationController?.navigationBar.titleTextAttributes = [
+            .foregroundColor: UIColor.white
+        ]
         
         layout()
         setNav()

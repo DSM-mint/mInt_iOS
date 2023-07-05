@@ -10,31 +10,33 @@ import RxCocoa
 public class MainViewController: UIViewController {
     
     let scrollView: UIScrollView = {
-      let scrollView = UIScrollView()
-      scrollView.backgroundColor = MintKitAsset.Colors.bkc.color
-      scrollView.translatesAutoresizingMaskIntoConstraints = false
-      return scrollView
+        let scrollView = UIScrollView()
+        scrollView.backgroundColor = MintKitAsset.Colors.bkc.color
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsHorizontalScrollIndicator = false
+        return scrollView
     }()
-
+    
     private var welcomeLabel = UILabel().then {
         $0.numberOfLines = 0
         $0.font = .systemFont(ofSize: 20.0, weight: .bold)
         let string = "박준하 님,\n오늘 하루는 어떠셨나요"
         let attributedString = NSMutableAttributedString(string: string)
-
+        
         if let nameRange = string.range(of: "박준하") {
             let nsRange = NSRange(nameRange, in: string)
             attributedString.addAttribute(.foregroundColor, value: MintKitAsset.Colors.mainColor.color, range: nsRange)
         }
-
+        
         if let otherTextRange = string.range(of: " 님,\n오늘 하루는 어떠셨나요") {
             let nsRange = NSRange(otherTextRange, in: string)
             attributedString.addAttribute(.foregroundColor, value: UIColor.white, range: nsRange)
         }
-
+        
         $0.attributedText = attributedString
     }
-
+    
     private var calendarView = CalendarView()
     var concertCollectionView: MintCollectionView!
     
@@ -43,17 +45,17 @@ public class MainViewController: UIViewController {
         $0.font = .systemFont(ofSize: 20.0, weight: .bold)
         let string = "전시 관람으로\n마음을 치유해보세요."
         let attributedString = NSMutableAttributedString(string: string)
-
+        
         if let nameRange = string.range(of: "전시 관람") {
             let nsRange = NSRange(nameRange, in: string)
             attributedString.addAttribute(.foregroundColor, value: MintKitAsset.Colors.mainColor.color, range: nsRange)
         }
-
+        
         if let otherTextRange = string.range(of: "으로\n마음을 치유해보세요.") {
             let nsRange = NSRange(otherTextRange, in: string)
             attributedString.addAttribute(.foregroundColor, value: UIColor.white, range: nsRange)
         }
-
+        
         $0.attributedText = attributedString
     }
     
@@ -63,7 +65,7 @@ public class MainViewController: UIViewController {
         let dataSource = MyModel.getModified()
         concertCollectionView = MintCollectionView(dataSource: dataSource)
         concertCollectionView.collectionView.contentInset = .init(top: 0, left: 0, bottom: 0, right: 0)
-                
+        
         concertCollectionView.collectionView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.left.equalToSuperview()
@@ -79,11 +81,11 @@ public class MainViewController: UIViewController {
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barTintColor = MintKitAsset.Colors.bkc.color
     }
-
+    
     func layout() {
         
         self.view.addSubview(scrollView)
-
+        
         scrollView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
@@ -94,7 +96,7 @@ public class MainViewController: UIViewController {
         
         let sView = UIView()
         scrollView.addSubview(stackView)
-
+        
         stackView.snp.makeConstraints {
             $0.top.equalTo(scrollView).offset(25.0)
             $0.bottom.equalTo(scrollView).offset(-25.0)
@@ -122,32 +124,32 @@ public class MainViewController: UIViewController {
             $0.height.equalTo(600.0)
         }
     }
-
-
+    
+    
     func setup() {
         view.backgroundColor = MintKitAsset.Colors.bkc.color
     }
-
+    
     func setupNev() {
         let image = MintKitAsset.Assets.mintLogo.image
-
+        
         let resizedImage = image.resized(toWidth: 73, height: 28)
         let button = UIButton(type: .custom)
         button.setImage(resizedImage, for: .normal)
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         button.frame = CGRect(x: 0, y: 0, width: 73, height: 28)
-
+        
         let barButtonItem = UIBarButtonItem(customView: button)
-
+        
         navigationItem.leftBarButtonItem = barButtonItem
     }
-
+    
     @objc func buttonTapped() {
         print("안녕")
         scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
-
+    
 }
 
 extension UIImage {
@@ -158,7 +160,7 @@ extension UIImage {
         draw(in: CGRect(origin: .zero, size: newSize))
         return UIGraphicsGetImageFromCurrentImageContext()
     }
-
+    
     func roundedImage(withRadius radius: CGFloat) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
         defer { UIGraphicsEndImageContext() }
