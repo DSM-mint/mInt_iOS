@@ -10,7 +10,7 @@ public class BaseFindVC: UIViewController {
     
     private var certificationOneTextField = MintOneTextField(placeholder1: "인증번호를 입력해주세요.")
     
-    private var mainButton = MintButton(buttonTitle: "아이디 찾기", titleColor: .white)
+    public var mainButton = MintButton(buttonTitle: "아이디 찾기", titleColor: .white)
     
     private var paintingLogo = UIImageView().then {
         $0.image = MintKitAsset.Assets.paintingLogo.image

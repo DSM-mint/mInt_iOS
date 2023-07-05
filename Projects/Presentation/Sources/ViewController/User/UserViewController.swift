@@ -63,6 +63,11 @@ public class UserViewController: UIViewController {
                 print("findIdButton")
                 self.navigationController?.pushViewController(SurveyViewController(), animated: true)
             }).disposed(by: disposeBag)
+        
+        profileEditButton.rx.tap
+            .subscribe(with: self, onNext: { owner, _ in
+                self.navigationController?.pushViewController(EditProfileViewController(), animated: true)
+            }).disposed(by: disposeBag)
     }
     
     func setupNev() {

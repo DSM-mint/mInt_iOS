@@ -5,15 +5,15 @@ import RxCocoa
 import RxSwift
 import Core
 
-public protocol MintCollectionViewDelegate: AnyObject {
+public protocol MintCollectionViewDelegate2: AnyObject {
     func didSelectItemAt(_ collectionView: MintCollectionView, indexPath: IndexPath)
 }
 
-open class MintCollectionView: UIView {
+open class MintCollectionView2: UIView {
     
     public weak var delegate: MintCollectionViewDelegate?
     
-    public var collectionView: UICollectionView!
+    var collectionView: UICollectionView!
     var dataSource: [MyModel] = []
     
     required public init(dataSource: [MyModel]) {
@@ -57,13 +57,13 @@ open class MintCollectionView: UIView {
     }
 }
 
-extension MintCollectionView: MyCollectionViewLayoutDelegate {
+extension MintCollectionView2: MyCollectionViewLayoutDelegate {
     func collectionView(_ collectionView: UICollectionView, heightForImageAtIndexPath indexPath: IndexPath) -> CGFloat {
         return dataSource[indexPath.item].contentSize.height
     }
 }
 
-extension MintCollectionView: UICollectionViewDelegate, UICollectionViewDataSource {
+extension MintCollectionView2: UICollectionViewDelegate, UICollectionViewDataSource {
 
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         print(dataSource.count)
@@ -89,11 +89,5 @@ extension MintCollectionView: UICollectionViewDelegate, UICollectionViewDataSour
             }
         }
         return cell
-    }
-}
-
-extension MintCollectionView {
-    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate?.didSelectItemAt(self, indexPath: indexPath)
     }
 }

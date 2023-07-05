@@ -39,10 +39,7 @@ public class MainViewController: UIViewController {
         $0.layer.cornerRadius = 16.0
     }
     
-    private var calendarView1 = UIView().then {
-        $0.backgroundColor = MintKitAsset.Colors.gary800.color
-        $0.layer.cornerRadius = 16.0
-    }
+    var concertCollectionView: MintCollectionView!
     
     private var artLabel = UILabel().then {
         $0.numberOfLines = 0
@@ -66,10 +63,21 @@ public class MainViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
 
+        let dataSource = MyModel.getModified()
+        concertCollectionView = MintCollectionView(dataSource: dataSource)
+        concertCollectionView.collectionView.contentInset = .init(top: 0, left: 0, bottom: 0, right: 0)
+        
+        concertCollectionView.collectionView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.left.equalToSuperview()
+            $0.right.equalToSuperview()
+            $0.height.equalTo(550)
+        }
         setupNev()
         setup()
         layout()
         
+        concertCollectionView.delegate = self
         tabBarController?.tabBar.barTintColor = MintKitAsset.Colors.bkc.color
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barTintColor = MintKitAsset.Colors.bkc.color
@@ -105,10 +113,10 @@ public class MainViewController: UIViewController {
         
         stackView.addArrangedSubview(artLabel)
         
-        stackView.addArrangedSubview(calendarView1)
-        calendarView1.snp.makeConstraints {
-            $0.width.equalTo(370.0)
-            $0.height.equalTo(450.0)
+        stackView.addArrangedSubview(concertCollectionView)
+        concertCollectionView.snp.makeConstraints {
+            $0.width.equalToSuperview()
+            $0.height.equalTo(600.0)
         }
     }
 
@@ -155,4 +163,15 @@ extension UIImage {
         draw(in: bounds)
         return UIGraphicsGetImageFromCurrentImageContext()
     }
+}
+
+
+extension MainViewController: MintCollectionViewDelegate {
+    
+    public func didSelectItemAt(_ collectionView: MintKit.MintCollectionView, indexPath: IndexPath) {
+        print(indexPath.row)
+        self.modalPresentationStyle = .fullScreen
+        self.navigationController?.pushViewController(DetailArtViewController(), animated: true)
+    }
+    
 }
