@@ -73,6 +73,7 @@ public class WriteMoodViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = MintKitAsset.Colors.bkc.color
+        title = "일기 작성하기"
         
         self.collectionView.dataSource = self
         self.collectionView.delegate = self

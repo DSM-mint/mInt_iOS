@@ -34,6 +34,7 @@ public class WriteDiaryViewController: UIViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
+        title = "일기 작성하기"
         
         view.backgroundColor = MintKitAsset.Colors.bkc.color
         

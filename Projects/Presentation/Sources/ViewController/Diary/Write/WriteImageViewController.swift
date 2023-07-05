@@ -33,6 +33,7 @@ public class WriteImageViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = "일기 작성하기"
         view.backgroundColor = MintKitAsset.Colors.bkc.color
         
         layout()
@@ -50,6 +51,8 @@ public class WriteImageViewController: UIViewController {
                     }
                 }
             }).disposed(by: disposeBag)
+        
+        addPictureView.pictureButton.addTarget(self, action: #selector(chooseImage(_:)), for: .touchUpInside)
     }
     
     func layout() {
@@ -83,7 +86,55 @@ public class WriteImageViewController: UIViewController {
             $0.height.equalTo(54.0)
         }
     }
+    
+    @objc func chooseImage(_ sender:UIButton) {
+        openImagePicker()
+    }
+    
     public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
             self.view.endEditing(true)
    }
+}
+
+@available(iOS 16.0, *)
+extension WriteImageViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func openImagePicker() {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        
+        let actionSheet = UIAlertController(title: "사진추가", message: "사진을 추가하는 방식을 선택해주세요", preferredStyle: .actionSheet)
+        
+        actionSheet.addAction(UIAlertAction(title: "카메라사용", style: .default, handler: { (_) in
+            if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                imagePickerController.sourceType = .camera
+                self.present(imagePickerController, animated: true, completion: nil)
+            } else {
+                print("Camera not available")
+            }
+        }))
+        
+        actionSheet.addAction(UIAlertAction(title: "앨범에서 가져오기", style: .default, handler: { (_) in
+            imagePickerController.sourceType = .photoLibrary
+            self.present(imagePickerController, animated: true, completion: nil)
+        }))
+        
+        actionSheet.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
+        
+        self.present(actionSheet, animated: true, completion: nil)
+    }
+    
+    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            addPictureView.pictureImage.image = selectedImage
+            addPictureView.pictureImage.layer.cornerRadius = 10.0
+            addPictureView.pictureImage.clipsToBounds = true
+        }
+        
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
 }
