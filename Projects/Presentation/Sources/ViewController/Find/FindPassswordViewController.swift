@@ -2,10 +2,13 @@ import UIKit
 import SnapKit
 import Then
 import Core
+import RxCocoa
+import RxSwift
 import MintKit
 
 public class FindPassswordViewController: BaseFindVC {
-    
+    var disposeBag = DisposeBag()
+
     public override func viewDidLoad() {
         super.viewDidLoad()
         

@@ -70,6 +70,7 @@ public class DetailDiaryViewController: UIViewController {
         
         title = "일기"
         
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         view.backgroundColor = MintKitAsset.Colors.bkc.color
         self.collectionView.dataSource = self
         self.collectionView.delegate = self

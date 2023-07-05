@@ -18,7 +18,7 @@ public class SurveyViewController: UIViewController {
 
     override public func viewDidLoad() {
         super.viewDidLoad()
-
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         let problemTexts = [
             "아무렇지도 않던 일들이 괴롭고\n 귀찮게 느껴졌다.",
             "먹고 싶지 않고 식욕이 없다.",

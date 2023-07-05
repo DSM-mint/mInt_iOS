@@ -29,6 +29,7 @@ public class WriteDiaryViewController: UIViewController {
         super.viewDidLoad()
         title = "일기 작성하기"
         
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         view.backgroundColor = MintKitAsset.Colors.bkc.color
         
         var timer = 0.0

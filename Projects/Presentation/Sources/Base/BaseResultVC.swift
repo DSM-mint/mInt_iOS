@@ -59,7 +59,7 @@ public class BaseResultVC: UIViewController {
         }
         
         instaButton.snp.makeConstraints {
-            $0.top.equalTo(feedbackLabel.snp.bottom).offset(50.0)
+            $0.top.equalTo(feedbackLabel.snp.bottom).offset(156.0)
             $0.leading.equalToSuperview().offset(30.0)
             $0.trailing.equalToSuperview().inset(30.0)
             $0.height.equalTo(54.0)

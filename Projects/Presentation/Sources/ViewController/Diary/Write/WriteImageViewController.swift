@@ -25,6 +25,7 @@ public class WriteImageViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         title = "일기 작성하기"
         view.backgroundColor = MintKitAsset.Colors.bkc.color
         

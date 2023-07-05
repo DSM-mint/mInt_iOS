@@ -70,7 +70,7 @@ public class LoginViewController: UIViewController {
                 let id = self.mintTextField.textField1.text ?? ""
                 let password = self.mintTextField.textField2.text ?? ""
                 
-                if password.isEmpty || id.isEmpty {
+                if password.isEmpty || id.isEmpty || id != "junha" || password != "85817469" {
                     self.shakePaintingLogo()
                 } else {
                     print("로그인")

@@ -84,7 +84,7 @@ public class UserViewController: UIViewController, UserViewControllerDelegate {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         view.backgroundColor = MintKitAsset.Colors.bkc.color
         setupNev()
         layout()
@@ -102,7 +102,14 @@ public class UserViewController: UIViewController, UserViewControllerDelegate {
                 self.navigationController?.pushViewController(editProfileVC, animated: true)
             }).disposed(by: disposeBag)
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "rectangle.portrait.and.arrow.right"), style: .plain, target: self, action: #selector(buttonDidTap))
+        navigationItem.rightBarButtonItem?.tintColor = MintKitAsset.Colors.mainColor.color
     }
+    
+    @objc func buttonDidTap() {
+        self.dismiss(animated: true)
+    }
+    
     
     func setupNev() {
         let leftItem = UIBarButtonItem(customView: navLabel)

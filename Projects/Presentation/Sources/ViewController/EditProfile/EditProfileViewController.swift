@@ -33,7 +33,7 @@ public class EditProfileViewController: UIViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         title = "프로필 수정"
         
         mintThreeTextField.textField1.text = "\(name)"

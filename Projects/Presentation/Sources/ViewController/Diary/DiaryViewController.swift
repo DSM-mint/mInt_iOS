@@ -69,6 +69,7 @@ public class DiaryViewController: UIViewController, DiaryCollectionViewDelegate 
             .foregroundColor: UIColor.white
         ]
         diaryCollectionView.delegate = self
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
     }
     
     public func diaryCollectionView(_ collectionView: DiaryCollectionView, didSelectItemAt indexPath: IndexPath) {

@@ -21,6 +21,7 @@ public class DiaryCollectionView: UIView {
         
         self.layout()
         self.setupCollectionView()
+        
     }
 
     required init?(coder: NSCoder) {

@@ -77,6 +77,8 @@ public class WriteMoodViewController: UIViewController {
         self.progressBarView.ratio = timer / finish
         collectionView.allowsMultipleSelection = true
         
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        
         nextButton.rx.tap
             .subscribe(with: self, onNext: { owner, _  in
                 self.navigationController?.pushViewController(WriteImageViewController(), animated: true)
