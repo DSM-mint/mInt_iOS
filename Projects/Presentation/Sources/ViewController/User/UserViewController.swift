@@ -6,7 +6,13 @@ import MintKit
 import RxSwift
 import RxCocoa
 
-public class UserViewController: UIViewController {
+protocol UserViewControllerDelegate: AnyObject {
+    func userProfileDataChanged(newName: String)
+}
+
+var name: String = "박준하"
+
+public class UserViewController: UIViewController, UserViewControllerDelegate {
     
     var disposeBag = DisposeBag()
     
@@ -15,14 +21,14 @@ public class UserViewController: UIViewController {
         $0.text = "마이페이지"
         $0.font = .systemFont(ofSize: 20.0, weight: .bold)
     }
-    
+
     private var welcomeLabel = UILabel().then {
         $0.numberOfLines = 0
         $0.font = .systemFont(ofSize: 23.0, weight: .bold)
-        let string = "박준하 님,\n안녕하세요~!"
+        let string = "\(name) 님,\n안녕하세요~!"
         let attributedString = NSMutableAttributedString(string: string)
 
-        if let nameRange = string.range(of: "박준하") {
+        if let nameRange = string.range(of: "\(name)") {
             let nsRange = NSRange(nameRange, in: string)
             attributedString.addAttribute(.foregroundColor, value: MintKitAsset.Colors.mainColor.color, range: nsRange)
         }
@@ -51,6 +57,31 @@ public class UserViewController: UIViewController {
         $0.setTitle("프로필 수정하기", for: .normal)
     }
     
+    
+    func userProfileDataChanged(newName: String) {
+        name = newName
+
+        updateWelcomeLabel(with: name)
+    }
+    
+    private func updateWelcomeLabel(with name: String) {
+        let string = "\(name) 님,\n안녕하세요~!"
+        let attributedString = NSMutableAttributedString(string: string)
+
+        if let nameRange = string.range(of: "\(name)") {
+            let nsRange = NSRange(nameRange, in: string)
+            attributedString.addAttribute(.foregroundColor, value: MintKitAsset.Colors.mainColor.color, range: nsRange)
+        }
+
+        if let otherTextRange = string.range(of: " 님,\n안녕하세요~!") {
+            let nsRange = NSRange(otherTextRange, in: string)
+            attributedString.addAttribute(.foregroundColor, value: UIColor.white, range: nsRange)
+        }
+
+        welcomeLabel.attributedText = attributedString
+    }
+    
+    
     public override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -66,8 +97,11 @@ public class UserViewController: UIViewController {
         
         profileEditButton.rx.tap
             .subscribe(with: self, onNext: { owner, _ in
-                self.navigationController?.pushViewController(EditProfileViewController(), animated: true)
+                let editProfileVC = EditProfileViewController()
+                editProfileVC.delegate = self
+                self.navigationController?.pushViewController(editProfileVC, animated: true)
             }).disposed(by: disposeBag)
+        
     }
     
     func setupNev() {

@@ -7,6 +7,7 @@ import Core
 import MintKit
 
 public class DiaryCollectionView: UIView {
+    weak var delegate: DiaryCollectionViewDelegate?
 
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -58,11 +59,32 @@ extension DiaryCollectionView: UICollectionViewDelegate, UICollectionViewDataSou
         cell.layout()
         cell.layer.cornerRadius = 9.25
         
+        let m = cell.mainTitle
+        let s = cell.subTitle
+        var i = cell.imageView.image
+        
+        switch indexPath.row {
+        case 0:
+            m.text = "잠 못드는 날"
+            s.text = "해커톤이 나를 이렇게 만들었어!"
+            i = MintKitAsset.Assets.testImage2.image
+        case 1:
+            m.text = "깃허브 커밋 못한 날"
+            s.text = "실수로 커밋을 하지 못하였다.."
+            i = MintKitAsset.Assets.testImage2.image
+        case 2:
+            m.text = "해커톤 발표 날"
+            s.text = "하하"
+            i = MintKitAsset.Assets.paintingLogo.image
+        default:
+            print("없음")
+        }
+        
         return cell
     }
 
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return 3
     }
 
     public func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -72,12 +94,10 @@ extension DiaryCollectionView: UICollectionViewDelegate, UICollectionViewDataSou
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 12.0
     }
-
+    
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        print(indexPath.row)
+        delegate?.diaryCollectionView(self, didSelectItemAt: indexPath)
     }
-
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.bounds.width, height: 100)
     }

@@ -15,6 +15,7 @@ import RxSwift
 import RxCocoa
 
 public class EditProfileViewController: UIViewController {
+    weak var delegate: UserViewControllerDelegate?
     
     var disposeBag = DisposeBag()
     
@@ -35,9 +36,11 @@ public class EditProfileViewController: UIViewController {
         
         title = "프로필 수정"
         
-        mintThreeTextField.textField1.text = "박준하"
+        mintThreeTextField.textField1.text = "\(name)"
         mintThreeTextField.textField2.text = "12345678!"
         mintThreeTextField.textField3.text = "goodjunha@gmail.com"
+        
+        name = mintThreeTextField.textField1.text!
         
         view.backgroundColor = MintKitAsset.Colors.bkc.color
         
@@ -49,11 +52,12 @@ public class EditProfileViewController: UIViewController {
         
         okButton.rx.tap
             .subscribe(with: self, onNext: { owner, _  in
-               print("findIdButton")
+                self.delegate?.userProfileDataChanged(newName: self.mintThreeTextField.textField1.text!)
+
                 guard let viewControllerStack = self.navigationController?.viewControllers else { return }
                 for viewController in viewControllerStack {
-                  if let bView = viewController as? UserViewController {
-                    self.navigationController?.popToViewController(bView, animated: true)
+                    if let bView = viewController as? UserViewController {
+                        self.navigationController?.popToViewController(bView, animated: true)
                     }
                 }
             }).disposed(by: disposeBag)

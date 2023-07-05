@@ -6,8 +6,12 @@ import MintKit
 import RxSwift
 import RxCocoa
 
+public protocol DiaryCollectionViewDelegate: AnyObject {
+    func diaryCollectionView(_ collectionView: DiaryCollectionView, didSelectItemAt indexPath: IndexPath)
+}
+
 @available(iOS 16.0, *)
-public class DiaryViewController: UIViewController {
+public class DiaryViewController: UIViewController, DiaryCollectionViewDelegate {
     
     var disposeBag = DisposeBag()
     
@@ -64,7 +68,37 @@ public class DiaryViewController: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = [
             .foregroundColor: UIColor.white
         ]
+        diaryCollectionView.delegate = self
     }
+    
+    public func diaryCollectionView(_ collectionView: DiaryCollectionView, didSelectItemAt indexPath: IndexPath) {
+            var mainTitleText = ""
+            var subTitleText = ""
+            var mainImage: UIImage?
+            
+            switch indexPath.row {
+            case 0:
+                let detailArtVC = DetailDiaryViewController(mainTitleText: "잠 못드는 날", mainImage: MintKitAsset.Assets.testImage2.image, subTitleText: "해커톤이 나를 이렇게 만들었어!")
+            
+                navigationController?.pushViewController(detailArtVC, animated: true)
+                print("1")
+                return
+            case 1:
+                mainTitleText = "깃허브 커밋 못한 날"
+                subTitleText = "실수로 커밋을 하지 못하였다."
+                mainImage = MintKitAsset.Assets.testImage2.image
+            case 2:
+                mainTitleText = "해커톤 발표 날"
+                subTitleText = "하하"
+                mainImage = MintKitAsset.Assets.paintingLogo.image
+            default:
+                print("없음")
+                return
+            }
+            
+            let detailDiaryViewController = DetailDiaryViewController(mainTitleText: mainTitleText, mainImage: mainImage!, subTitleText: subTitleText)
+            navigationController?.pushViewController(detailDiaryViewController, animated: true)
+        }
     
     @objc func buttonDidTap() {
         self.navigationController?.pushViewController(WriteDiaryViewController(), animated: true)
@@ -115,7 +149,7 @@ public class DiaryViewController: UIViewController {
         
         diaryCollectionView.snp.makeConstraints {
             $0.width.equalTo(370.0)
-            $0.height.equalTo(600.0)
+            $0.height.equalTo(400.0)
         }
     }
     public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){

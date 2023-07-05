@@ -7,7 +7,7 @@ public class ModuleFactory {
 }
 
 @available(iOS 16.0, *)
-extension ModuleFactory: ModuleFactoryInterface {
+extension ModuleFactory: ModuleFactoryInterface {    
     
     public func writeImageVC() -> Presentation.WriteImageViewController {
         let writeImageVC = WriteImageViewController()

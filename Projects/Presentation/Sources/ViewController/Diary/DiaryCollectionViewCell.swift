@@ -18,24 +18,24 @@ class DiaryCollectionViewCell: UICollectionViewCell {
     
     static var id: String = "DiaryCollectionViewCell"
     
-    private var imageView = UIImageView().then {
+    public var imageView = UIImageView().then {
         $0.image = MintKitAsset.Assets.testImage2.image
         $0.layer.cornerRadius = 10.0
     }
     
-    private var dateTitle = UILabel().then {
+    public var dateTitle = UILabel().then {
         $0.text = "2023.6.26"
         $0.textColor = MintKitAsset.Colors.gary300.color
         $0.font = .systemFont(ofSize: 12.0, weight: .bold)
     }
     
-    private var mainTitle = UILabel().then {
+    public var mainTitle = UILabel().then {
         $0.text = "오늘은 이거 한 날"
         $0.textColor = MintKitAsset.Colors.gary000.color
         $0.font = .systemFont(ofSize: 15.0, weight: .bold)
     }
     
-    private var subTitle = UILabel().then {
+    public var subTitle = UILabel().then {
         $0.text = "오늘은 이거를 했습니다. 기분은 별로 였는데요"
         $0.textColor =  MintKitAsset.Colors.gary400.color
         $0.font = .systemFont(ofSize: 13.0, weight: .bold)
