@@ -56,6 +56,12 @@ public class DiaryViewController: UIViewController {
         navigationItem.rightBarButtonItem?.tintColor = MintKitAsset.Colors.mainColor.color
 
         layout()
+        
+        navigationController?.navigationBar.isTranslucent = false
+            navigationController?.navigationBar.barTintColor = MintKitAsset.Colors.bkc.color
+            navigationController?.navigationBar.titleTextAttributes = [
+                .foregroundColor: UIColor.white
+            ]
     }
     
     @objc func buttonDidTap() {

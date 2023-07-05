@@ -19,19 +19,19 @@ class DiaryCollectionViewCell: UICollectionViewCell {
     static var id: String = "DiaryCollectionViewCell"
     
     private var imageView = UIImageView().then {
-        $0.backgroundColor = .red
+        $0.image = MintKitAsset.Assets.testImage2.image
         $0.layer.cornerRadius = 10.0
     }
     
     private var dateTitle = UILabel().then {
         $0.text = "2023.6.26"
-        $0.textColor = .black
+        $0.textColor = MintKitAsset.Colors.gary300.color
         $0.font = .systemFont(ofSize: 12.0, weight: .bold)
     }
     
     private var mainTitle = UILabel().then {
         $0.text = "오늘은 이거 한 날"
-        $0.textColor = .black
+        $0.textColor = MintKitAsset.Colors.gary000.color
         $0.font = .systemFont(ofSize: 15.0, weight: .bold)
     }
     

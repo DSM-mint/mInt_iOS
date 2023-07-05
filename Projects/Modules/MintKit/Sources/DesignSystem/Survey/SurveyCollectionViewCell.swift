@@ -33,7 +33,7 @@ open class SurveyView: UIView {
         $0.backgroundColor = .black
         $0.layer.cornerRadius = 30
         $0.layer.borderWidth = 3
-        $0.layer.borderColor = MintKitAsset.Colors.mainColor.color.cgColor
+        $0.layer.borderColor = MintKitAsset.Colors.error.color.cgColor
     }
     
     let button3 = UIButton().then {
@@ -47,17 +47,42 @@ open class SurveyView: UIView {
         $0.backgroundColor = .black
         $0.layer.cornerRadius = 40
         $0.layer.borderWidth = 3
-        $0.layer.borderColor = MintKitAsset.Colors.error.color.cgColor
+        $0.layer.borderColor = MintKitAsset.Colors.mainColor.color.cgColor
     }
+    
+    public var isSelectedButton1: Bool = false
+    public var isSelectedButton2: Bool = false
+    public var isSelectedButton3: Bool = false
+    public var isSelectedButton4: Bool = false
     
     public init(problemText: String) {
         super.init(frame: .zero)
         titleLabel.text = problemText
         setupView()
+        updateSelectedState()
+        
+        button1.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        button2.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        button3.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        button4.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+
     }
     
     public required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    public var isToggleSelected: Bool = false {
+        didSet {
+            updateSelectedState()
+        }
+    }
+    
+    func updateSelectedState() {
+        button1.backgroundColor = isSelectedButton1 ? MintKitAsset.Colors.error.color : .black
+        button2.backgroundColor = isSelectedButton2 ? MintKitAsset.Colors.error.color : .black
+        button3.backgroundColor = isSelectedButton3 ? MintKitAsset.Colors.mainColor.color : .black
+        button4.backgroundColor = isSelectedButton4 ? MintKitAsset.Colors.mainColor.color : .black
     }
     
     private func setupView() {
@@ -96,4 +121,18 @@ open class SurveyView: UIView {
             make.top.equalTo(titleLabel.snp.bottom).offset(20)
         }
     }
-}
+    
+    @objc func buttonTapped(_ sender: UIButton) {
+         if sender == button1 {
+             isSelectedButton1.toggle()
+         } else if sender == button2 {
+             isSelectedButton2.toggle()
+         } else if sender == button3 {
+             isSelectedButton3.toggle()
+         } else if sender == button4 {
+             isSelectedButton4.toggle()
+         }
+
+         updateSelectedState()
+     }
+ }
