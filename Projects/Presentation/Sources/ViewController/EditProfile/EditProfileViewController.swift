@@ -35,6 +35,8 @@ public class EditProfileViewController: UIViewController {
         mintThreeTextField.textField2.text = "12345678!"
         mintThreeTextField.textField3.text = "goodjunha@gmail.com"
         
+        view.backgroundColor = MintKitAsset.Colors.bkc.color
+        
         changePasswordButton.rx.tap
             .subscribe(with: self, onNext: { owner, _  in
                print("findIdButton")

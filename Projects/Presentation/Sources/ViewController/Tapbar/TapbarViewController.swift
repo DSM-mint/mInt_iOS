@@ -14,6 +14,7 @@ import MintKit
 import RxSwift
 import RxCocoa
 
+@available(iOS 16.0, *)
 public class TapbarViewController: UITabBarController {
     
     public var factory: ModuleFactoryInterface!

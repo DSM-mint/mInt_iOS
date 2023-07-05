@@ -6,6 +6,7 @@ import MintKit
 import RxSwift
 import RxCocoa
 
+@available(iOS 16.0, *)
 public class LoginViewController: UIViewController {
     
     var disposeBag = DisposeBag()

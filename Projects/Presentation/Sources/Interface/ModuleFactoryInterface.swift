@@ -1,5 +1,6 @@
 import Foundation
 
+@available(iOS 16.0, *)
 public protocol ModuleFactoryInterface {
     func loginVC() -> LoginViewController
     func mainVC() -> MainViewController

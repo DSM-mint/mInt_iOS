@@ -6,6 +6,7 @@ public class ModuleFactory {
     private init() { }
 }
 
+@available(iOS 16.0, *)
 extension ModuleFactory: ModuleFactoryInterface {
     
     public func editProfileVC() -> Presentation.EditProfileViewController {

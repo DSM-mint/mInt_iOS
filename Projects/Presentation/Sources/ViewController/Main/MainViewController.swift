@@ -6,6 +6,7 @@ import MintKit
 import RxSwift
 import RxCocoa
 
+@available(iOS 16.0, *)
 public class MainViewController: UIViewController {
     
     let scrollView: UIScrollView = {
@@ -34,11 +35,7 @@ public class MainViewController: UIViewController {
         $0.attributedText = attributedString
     }
 
-    private var calendarView = UIView().then {
-        $0.backgroundColor = MintKitAsset.Colors.gary800.color
-        $0.layer.cornerRadius = 16.0
-    }
-    
+    private var calendarView = CalendarView()
     var concertCollectionView: MintCollectionView!
     
     private var artLabel = UILabel().then {
@@ -62,11 +59,11 @@ public class MainViewController: UIViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         let dataSource = MyModel.getModified()
         concertCollectionView = MintCollectionView(dataSource: dataSource)
         concertCollectionView.collectionView.contentInset = .init(top: 0, left: 0, bottom: 0, right: 0)
-        
+                
         concertCollectionView.collectionView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.left.equalToSuperview()
@@ -166,6 +163,7 @@ extension UIImage {
 }
 
 
+@available(iOS 16.0, *)
 extension MainViewController: MintCollectionViewDelegate {
     
     public func didSelectItemAt(_ collectionView: MintKit.MintCollectionView, indexPath: IndexPath) {
