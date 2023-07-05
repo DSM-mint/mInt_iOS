@@ -21,3 +21,16 @@ class ConsultingWebViewController: BaseWebView {
         }
     }
 }
+
+class ParkWebViewController: BaseWebView {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        title = "공원"
+        self.navigationItem.largeTitleDisplayMode = .never
+        if let url = URL(string: "https://www.tripadvisor.co.kr/Attractions-g297887-Activities-c57-Daejeon.html") {
+            setupWebView(with: url)
+        }
+    }
+}

@@ -1,11 +1,3 @@
-//
-//  SurveyView.swift
-//  MintKit
-//
-//  Created by 박준하 on 2023/07/04.
-//  Copyright © 2023 Mint-iOS. All rights reserved.
-//
-
 import UIKit
 import SnapKit
 import Then
@@ -13,6 +5,10 @@ import RxCocoa
 import RxSwift
 
 open class SurveyView: UIView {
+    
+    public var onButtonTapped: ((Int, Bool, Bool, Bool, Bool) -> Void)?
+    
+    public var currentIndex: Int = 0
     
     public var titleLabel = UILabel().then {
         $0.text = "아무렇지도 않던 일들이 괴롭고\n귀찮게 느껴져요 "
@@ -145,5 +141,7 @@ open class SurveyView: UIView {
             isSelectedButton4 = true
         }
         updateSelectedState()
+        
+        onButtonTapped?(currentIndex, isSelectedButton1, isSelectedButton2, isSelectedButton3, isSelectedButton4)
     }
  }
