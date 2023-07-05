@@ -52,6 +52,34 @@ public class LoginViewController: UIViewController {
         loginButton.layer.opacity = 0.5
         layout()
         
+        let idTextField = mintTextField.textField1.rx.text.orEmpty.asObservable()
+        let passwordTextField = mintTextField.textField2.rx.text.orEmpty.asObservable()
+
+        Observable.combineLatest(idTextField, passwordTextField)
+            .map { id, password -> Bool in
+                return !id.isEmpty && !password.isEmpty
+            }
+            .bind { [weak self] allFieldsFilled in
+                self?.loginButton.layer.opacity = allFieldsFilled ? 1.0 : 0.5
+            }
+            .disposed(by: disposeBag)
+        
+        loginButton.rx.tap
+            .subscribe(with: self, onNext: { owner, _  in
+               print("findIdButton")
+                let id = self.mintTextField.textField1.text ?? ""
+                let password = self.mintTextField.textField2.text ?? ""
+                
+                if password.isEmpty || id.isEmpty {
+                    self.shakePaintingLogo()
+                } else {
+                    print("로그인")
+                    let tapbarVC = TapbarViewController()
+                    tapbarVC.modalPresentationStyle = .fullScreen
+                    self.present(tapbarVC, animated: true)
+                }
+            }).disposed(by: disposeBag)
+        
         findIdButton.rx.tap
             .subscribe(with: self, onNext: { owner, _  in
                print("findIdButton")
@@ -70,13 +98,6 @@ public class LoginViewController: UIViewController {
                print("findPasswordButton")
                 self.modalPresentationStyle = .fullScreen
                 self.navigationController?.pushViewController(SignUpViewController(), animated: true)
-            }).disposed(by: disposeBag)
-        
-        loginButton.rx.tap
-            .subscribe(with: self, onNext: { owner, _ in
-                let tapbarVC = TapbarViewController()
-                tapbarVC.modalPresentationStyle = .fullScreen
-                self.present(tapbarVC, animated: true)
             }).disposed(by: disposeBag)
         
         setupKeyboardObservers()
@@ -106,6 +127,24 @@ public class LoginViewController: UIViewController {
 
     @objc private func keyboardWillHide(notification: Notification) {
         view.frame.origin.y = 0
+    }
+    
+    private func shakePaintingLogo() {
+        let shakeAnimation = CABasicAnimation(keyPath: "position")
+        shakeAnimation.duration = 0.1
+        shakeAnimation.repeatCount = 5
+        shakeAnimation.autoreverses = true
+        
+        let fromPoint = CGPoint(x: paintingLogo.center.x - 5, y: paintingLogo.center.y)
+        let fromValue = NSValue(cgPoint: fromPoint)
+        
+        let toPoint = CGPoint(x: paintingLogo.center.x + 5, y: paintingLogo.center.y)
+        let toValue = NSValue(cgPoint: toPoint)
+        
+        shakeAnimation.fromValue = fromValue
+        shakeAnimation.toValue = toValue
+        
+        self.paintingLogo.layer.add(shakeAnimation, forKey: "position")
     }
     
     private func layout() {

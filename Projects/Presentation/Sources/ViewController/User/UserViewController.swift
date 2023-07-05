@@ -36,7 +36,9 @@ public class UserViewController: UIViewController {
     }
     
     private var userImageView = UIImageView().then {
-        $0.backgroundColor = MintKitAsset.Colors.gary700.color
+        $0.image = MintKitAsset.Assets.logo.image
+        $0.layer.cornerRadius = 10.0
+        $0.clipsToBounds = true
     }
     
     private var sadButton = UIButton().then {
@@ -55,9 +57,7 @@ public class UserViewController: UIViewController {
         view.backgroundColor = MintKitAsset.Colors.bkc.color
         setupNev()
         layout()
-        
-        userImageView.layer.cornerRadius = 10.0
-        
+                
         sadButton.rx.tap
             .subscribe(with: self, onNext: { owner, _ in
                 print("findIdButton")

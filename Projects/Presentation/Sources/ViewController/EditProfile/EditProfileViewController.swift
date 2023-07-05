@@ -19,17 +19,21 @@ public class EditProfileViewController: UIViewController {
     var disposeBag = DisposeBag()
     
     var userImageView = UIImageView().then {
-        $0.backgroundColor = MintKitAsset.Colors.gary700.color
+        $0.image = MintKitAsset.Assets.logo.image
         $0.layer.cornerRadius = 10.0
+        $0.layer.cornerRadius = 10.0
+        $0.clipsToBounds = true
     }
     
     var mintThreeTextField = MintThreeTextField(placeholder1: "이름을 입력해주세요.", placeholder2: "비밀번호를 입력해주세요.", placeholder3: "이메일을 입력해주세요.")
-    var changePasswordButton = MintButton(buttonTitle: "비밀번호 변경하기", titleColor: .white, backgroud: .black)
+    var changePasswordButton = MintButton(buttonTitle: "비밀번호 변경하기", titleColor: .white, backgroud: .clear)
     
     var okButton = MintButton(buttonTitle: "완료", titleColor: .white)
     
     public override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "프로필 수정"
         
         mintThreeTextField.textField1.text = "박준하"
         mintThreeTextField.textField2.text = "12345678!"
@@ -46,7 +50,12 @@ public class EditProfileViewController: UIViewController {
         okButton.rx.tap
             .subscribe(with: self, onNext: { owner, _  in
                print("findIdButton")
-                self.dismiss(animated: true)
+                guard let viewControllerStack = self.navigationController?.viewControllers else { return }
+                for viewController in viewControllerStack {
+                  if let bView = viewController as? UserViewController {
+                    self.navigationController?.popToViewController(bView, animated: true)
+                    }
+                }
             }).disposed(by: disposeBag)
         
         layout()
