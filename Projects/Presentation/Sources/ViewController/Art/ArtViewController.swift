@@ -25,6 +25,25 @@ public class ArtViewController: UIViewController {
         $0.font = .systemFont(ofSize: 20.0, weight: .bold)
     }
     
+    private var welcomeLabel = UILabel().then {
+        $0.numberOfLines = 0
+        $0.font = .systemFont(ofSize: 20.0, weight: .bold)
+        let string = "박준하 님,\n이런 경험은 어떠세요?"
+        let attributedString = NSMutableAttributedString(string: string)
+
+        if let nameRange = string.range(of: "박준하") {
+            let nsRange = NSRange(nameRange, in: string)
+            attributedString.addAttribute(.foregroundColor, value: MintKitAsset.Colors.mainColor.color, range: nsRange)
+        }
+
+        if let otherTextRange = string.range(of: " 님,\n이런 경험은 어떠세요?") {
+            let nsRange = NSRange(otherTextRange, in: string)
+            attributedString.addAttribute(.foregroundColor, value: UIColor.white, range: nsRange)
+        }
+
+        $0.attributedText = attributedString
+    }
+    
     var titleLabel1 = UILabel().then {
         $0.text = "콘서트"
         $0.font = .systemFont(ofSize: 20.0, weight: .bold)
@@ -108,6 +127,7 @@ public class ArtViewController: UIViewController {
         }
         
         [
+            welcomeLabel,
             titleLabel1,
             concertCollectionView,
             
@@ -122,9 +142,14 @@ public class ArtViewController: UIViewController {
             
         ].forEach { stackView.addArrangedSubview($0) }
         
-        titleLabel1.snp.makeConstraints {
+        welcomeLabel.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.leading.equalToSuperview().offset(30.0)
+        }
+        
+        titleLabel1.snp.makeConstraints {
+            $0.top.equalTo(welcomeLabel.snp.bottom).offset(14.0)
+            $0.left.equalToSuperview().offset(30.0)
         }
         
         concertCollectionView!.snp.makeConstraints {
