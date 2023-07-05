@@ -30,4 +30,8 @@ public class ChangePasswordCertificationViewController: BaseFindVC {
                 self.navigationController?.pushViewController(ChangePasswordViewController(), animated: true)
             }).disposed(by: disposeBag)
     }
+    
+    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+            self.view.endEditing(true)
+   }
 }

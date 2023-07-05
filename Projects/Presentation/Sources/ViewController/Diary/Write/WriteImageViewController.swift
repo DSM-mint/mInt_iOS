@@ -83,4 +83,7 @@ public class WriteImageViewController: UIViewController {
             $0.height.equalTo(54.0)
         }
     }
+    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+            self.view.endEditing(true)
+   }
 }

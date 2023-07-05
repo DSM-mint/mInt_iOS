@@ -12,4 +12,8 @@ public class FindPassswordViewController: BaseFindVC {
         title = "비밀번호 찾기"
         updateWith(self)
     }
+    
+    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+            self.view.endEditing(true)
+   }
 }

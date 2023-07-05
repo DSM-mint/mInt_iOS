@@ -158,6 +158,9 @@ public class WriteMoodViewController: UIViewController {
             $0.width.equalTo(180.0)
         }
     }
+    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+            self.view.endEditing(true)
+   }
 }
 
 @available(iOS 16.0, *)

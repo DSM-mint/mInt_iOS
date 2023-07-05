@@ -134,4 +134,7 @@ public class LoginViewController: UIViewController {
             $0.height.width.equalTo(306.0)
         }
     }
+    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+            self.view.endEditing(true)
+   }
 }
