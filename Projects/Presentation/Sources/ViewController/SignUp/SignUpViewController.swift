@@ -19,6 +19,8 @@ public class SignUpViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = MintKitAsset.Colors.bkc.color
+        
         title = "회원가입"
         
         view.addSubview(userImageView)
