@@ -12,22 +12,24 @@ open class AddPictureView: UIView {
         $0.backgroundColor = MintKitAsset.Colors.gary700.color
     }
     
+    private let pictureTitleBackgroundView = UIView().then {
+        $0.backgroundColor = MintKitAsset.Colors.mainColor.color
+    }
+
     public init(titleText: String) {
         
         pictureButton = UIButton().then {
             $0.setTitle(titleText, for: .normal)
             $0.setTitleColor(UIColor.white, for: .normal)
-            $0.frame = CGRect(x: 0, y: 0, width: 140.0, height: 30.0)
             $0.titleLabel?.font = .systemFont(ofSize: 10.0, weight: .bold)
-            $0.backgroundColor = MintKitAsset.Colors.mainColor.color
+            $0.backgroundColor = .clear
         }
         
         super.init(frame: .zero)
         
         setupLayout()
         pictureImage.layer.cornerRadius = 10.0
-        //버튼 같이 구부러 지는 에러
-        pictureButton.layer.cornerRadius = 10.0
+        pictureTitleBackgroundView.layer.cornerRadius = 10.0
     }
     
     required public init?(coder: NSCoder) {
@@ -36,16 +38,21 @@ open class AddPictureView: UIView {
     
     open func setupLayout() {
         addSubview(pictureImage)
+        addSubview(pictureTitleBackgroundView)
         addSubview(pictureButton)
         
         pictureImage.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
         
-        pictureButton.snp.makeConstraints {
+        pictureTitleBackgroundView.snp.makeConstraints {
             $0.bottom.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(30.0)
-            $0.width.equalToSuperview()
+        }
+        
+        pictureButton.snp.makeConstraints {
+            $0.edges.equalTo(pictureTitleBackgroundView)
         }
     }
 }

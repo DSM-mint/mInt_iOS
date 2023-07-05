@@ -48,6 +48,8 @@ public class LoginViewController: UIViewController {
         
         view.backgroundColor = MintKitAsset.Colors.bkc.color
         print("시작됨")
+        
+        loginButton.layer.opacity = 0.5
         layout()
         
         findIdButton.rx.tap
@@ -77,6 +79,33 @@ public class LoginViewController: UIViewController {
                 self.present(tapbarVC, animated: true)
             }).disposed(by: disposeBag)
         
+        setupKeyboardObservers()
+    }
+    
+    private func setupKeyboardObservers() {
+        NotificationCenter.default.rx.notification(UIResponder.keyboardWillShowNotification)
+            .subscribe(onNext: { [weak self] notification in
+                self?.keyboardWillShow(notification: notification)
+            })
+            .disposed(by: disposeBag)
+
+        NotificationCenter.default.rx.notification(UIResponder.keyboardWillHideNotification)
+            .subscribe(onNext: { [weak self] notification in
+                self?.keyboardWillHide(notification: notification)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    @objc private func keyboardWillShow(notification: Notification) {
+        guard let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+        let keyboardRectangle = keyboardFrame.cgRectValue
+        let keyboardHeight = keyboardRectangle.height
+        
+        view.frame.origin.y = 0 - keyboardHeight * 0.3
+    }
+
+    @objc private func keyboardWillHide(notification: Notification) {
+        view.frame.origin.y = 0
     }
     
     private func layout() {
