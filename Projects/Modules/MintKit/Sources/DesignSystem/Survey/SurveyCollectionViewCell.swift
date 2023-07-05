@@ -123,16 +123,27 @@ open class SurveyView: UIView {
     }
     
     @objc func buttonTapped(_ sender: UIButton) {
-         if sender == button1 {
-             isSelectedButton1.toggle()
-         } else if sender == button2 {
-             isSelectedButton2.toggle()
-         } else if sender == button3 {
-             isSelectedButton3.toggle()
-         } else if sender == button4 {
-             isSelectedButton4.toggle()
-         }
-
-         updateSelectedState()
-     }
+        if sender == button1 {
+            isSelectedButton1 = true
+            isSelectedButton2 = false
+            isSelectedButton3 = false
+            isSelectedButton4 = false
+        } else if sender == button2 {
+            isSelectedButton1 = false
+            isSelectedButton2 = true
+            isSelectedButton3 = false
+            isSelectedButton4 = false
+        } else if sender == button3 {
+            isSelectedButton1 = false
+            isSelectedButton2 = false
+            isSelectedButton3 = true
+            isSelectedButton4 = false
+        } else if sender == button4 {
+            isSelectedButton1 = false
+            isSelectedButton2 = false
+            isSelectedButton3 = false
+            isSelectedButton4 = true
+        }
+        updateSelectedState()
+    }
  }

@@ -52,8 +52,8 @@ extension ModuleFactory: ModuleFactoryInterface {
         return diaryVC
     }
     
-    public func resultVC() -> Presentation.ResultViewController {
-        let resultVC = ResultViewController()
+    public func resultVC() -> Presentation.BadResultViewController {
+        let resultVC = BadResultViewController()
         
         return resultVC
     }

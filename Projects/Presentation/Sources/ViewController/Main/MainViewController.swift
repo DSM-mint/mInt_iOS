@@ -139,6 +139,7 @@ public class MainViewController: UIViewController {
 
     @objc func buttonTapped() {
         print("안녕")
+        scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
 
 }
