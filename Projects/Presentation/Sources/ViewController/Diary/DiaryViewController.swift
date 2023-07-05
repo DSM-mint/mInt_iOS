@@ -6,6 +6,7 @@ import MintKit
 import RxSwift
 import RxCocoa
 
+@available(iOS 16.0, *)
 public class DiaryViewController: UIViewController {
 
     var disposeBag = DisposeBag()
@@ -42,10 +43,8 @@ public class DiaryViewController: UIViewController {
       return scrollView
     }()
     
-    private var calendarView = UIView().then {
-        $0.backgroundColor = MintKitAsset.Colors.gary800.color
-        $0.layer.cornerRadius = 16.0
-    }
+    private var calendarView = CalendarView()
+    private var diaryCollectionView = DiaryCollectionView(frame: .zero)
     
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,7 +90,8 @@ public class DiaryViewController: UIViewController {
         
         [
             writingLabel,
-            calendarView
+            calendarView,
+            diaryCollectionView
         ].forEach {
             stackView.addArrangedSubview($0)
         }
@@ -99,6 +99,11 @@ public class DiaryViewController: UIViewController {
         calendarView.snp.makeConstraints {
             $0.width.equalTo(370.0)
             $0.height.equalTo(450.0)
+        }
+        
+        diaryCollectionView.snp.makeConstraints {
+            $0.width.equalTo(370.0)
+            $0.height.equalTo(600.0)
         }
     }
 }

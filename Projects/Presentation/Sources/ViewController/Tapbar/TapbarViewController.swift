@@ -29,7 +29,7 @@ public class TapbarViewController: UITabBarController {
         
         homeVC.tabBarItem = tabOneBarItem
         
-        let diaryVC = UINavigationController(rootViewController: UIViewController())
+        let diaryVC = UINavigationController(rootViewController: DiaryViewController())
         let tabTwoBarItem2 = UITabBarItem(title: "",
                                           image: MintKitAsset.Assets.diaryImage.image,
                                           tag: 2)

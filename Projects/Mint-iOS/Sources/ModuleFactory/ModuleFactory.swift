@@ -8,6 +8,18 @@ public class ModuleFactory {
 
 @available(iOS 16.0, *)
 extension ModuleFactory: ModuleFactoryInterface {
+    public func writeMoodVC() -> Presentation.WriteMoodViewController {
+        let writeMoodVC = WriteMoodViewController()
+        
+        return writeMoodVC
+    }
+    
+    public func writeDiaryVC() -> Presentation.WriteDiaryViewController {
+        let writeDiaryVC = WriteDiaryViewController()
+        
+        return writeDiaryVC
+    }
+    
     
     public func editProfileVC() -> Presentation.EditProfileViewController {
         let editProfileVC = EditProfileViewController()

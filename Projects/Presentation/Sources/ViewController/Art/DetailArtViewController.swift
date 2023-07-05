@@ -19,7 +19,7 @@ public class DetailArtViewController: UIViewController {
     var disposebag = DisposeBag()
     
     var imageView = UIImageView().then {
-        $0.image = MintKitAsset.Assets.backgroudImage.image
+        $0.image = MintKitAsset.Assets.backgrooudImage.image
     }
     
     var subTitle = UILabel().then {
