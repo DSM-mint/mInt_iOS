@@ -15,7 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = scene
         
         let moduleFactory = ModuleFactory.shared
-        let rootViewController = moduleFactory.writeImageVC()
+        let rootViewController = moduleFactory.loginVC()
 
         window?.rootViewController = BaseNC(rootViewController: rootViewController)
         window?.makeKeyAndVisible()

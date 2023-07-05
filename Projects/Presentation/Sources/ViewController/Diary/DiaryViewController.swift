@@ -52,10 +52,14 @@ public class DiaryViewController: UIViewController {
         view.backgroundColor = MintKitAsset.Colors.bkc.color
         stupNev()
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: nil)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(buttonDidTap))
         navigationItem.rightBarButtonItem?.tintColor = MintKitAsset.Colors.mainColor.color
 
         layout()
+    }
+    
+    @objc func buttonDidTap() {
+        self.navigationController?.pushViewController(WriteDiaryViewController(), animated: true)
     }
     
     func stupNev() {

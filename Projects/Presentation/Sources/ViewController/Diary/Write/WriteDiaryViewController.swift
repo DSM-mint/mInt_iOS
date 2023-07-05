@@ -14,7 +14,10 @@ import Core
 import MintKit
 
 //1
+@available(iOS 16.0, *)
 public class WriteDiaryViewController: UIViewController {
+    
+    var disposeBag = DisposeBag()
     
     private var writeTitle = UILabel().then {
         $0.text = "오늘 일어난 일을 적어보세요."
@@ -32,11 +35,19 @@ public class WriteDiaryViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = MintKitAsset.Colors.bkc.color
+        
         var timer = 0.0
         let finish = 3.0
         timer += 1
         self.progressBarView.ratio = timer / finish
         layout()
+        
+        nextButton.rx.tap
+            .subscribe(with: self, onNext: { owner, _  in
+                self.navigationController?.pushViewController(WriteMoodViewController(), animated: true)
+            }).disposed(by: disposeBag)
+        
     }
     
     func layout() {

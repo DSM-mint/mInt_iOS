@@ -14,8 +14,12 @@ import RxSwift
 import Core
 import MintKit
 
+//3
+@available(iOS 16.0, *)
 public class WriteImageViewController: UIViewController {
     
+    var disposeBag = DisposeBag()
+
     private var imageTitle = UILabel().then {
         $0.text = "오늘 기분을 사진으로 표현해보세요."
         $0.textColor = .white
@@ -36,6 +40,16 @@ public class WriteImageViewController: UIViewController {
         let finish = 3.0
         timer += 3
         self.progressBarView.ratio = timer / finish
+        
+        okButton.rx.tap
+            .subscribe(with: self, onNext: { owner, _  in
+                guard let viewControllerStack = self.navigationController?.viewControllers else { return }
+                for viewController in viewControllerStack {
+                  if let bView = viewController as? DiaryViewController {
+                    self.navigationController?.popToViewController(bView, animated: true)
+                    }
+                }
+            }).disposed(by: disposeBag)
     }
     
     func layout() {

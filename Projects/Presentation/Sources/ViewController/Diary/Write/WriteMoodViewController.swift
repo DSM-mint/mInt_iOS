@@ -16,7 +16,10 @@ import MintKit
 
 
 //2
+@available(iOS 16.0, *)
 public class WriteMoodViewController: UIViewController {
+    
+    var disposeBag = DisposeBag()
     
     private var moodTitle = UILabel().then {
         $0.text = "오늘 기분은 어떠세요?"
@@ -80,6 +83,21 @@ public class WriteMoodViewController: UIViewController {
         timer += 2
         self.progressBarView.ratio = timer / finish
         collectionView.allowsMultipleSelection = true
+        
+        nextButton.rx.tap
+            .subscribe(with: self, onNext: { owner, _  in
+                self.navigationController?.pushViewController(WriteImageViewController(), animated: true)
+            }).disposed(by: disposeBag)
+        
+        backButton.rx.tap
+            .subscribe(with: self, onNext: { owner, _  in
+                guard let viewControllerStack = self.navigationController?.viewControllers else { return }
+                for viewController in viewControllerStack {
+                  if let bView = viewController as? WriteDiaryViewController {
+                    self.navigationController?.popToViewController(bView, animated: true)
+                    }
+                }
+            }).disposed(by: disposeBag)
     }
     
     public override func loadView() {
@@ -142,6 +160,7 @@ public class WriteMoodViewController: UIViewController {
     }
 }
 
+@available(iOS 16.0, *)
 extension WriteMoodViewController: UICollectionViewDataSource {
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -167,6 +186,7 @@ extension WriteMoodViewController: UICollectionViewDataSource {
     }
 }
 
+@available(iOS 16.0, *)
 extension WriteMoodViewController: UICollectionViewDelegateFlowLayout {
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
