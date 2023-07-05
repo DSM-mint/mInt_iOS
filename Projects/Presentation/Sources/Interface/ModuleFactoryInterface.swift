@@ -16,6 +16,7 @@ public protocol ModuleFactoryInterface {
     func editProfileVC() -> EditProfileViewController
     func writeDiaryVC() -> WriteDiaryViewController
     func writeMoodVC() -> WriteMoodViewController
+    func writeImageVC() -> WriteImageViewController
 //    func tabBarVC() -> TapBarViewController
 //    func companyListVC() -> CompanyListViewController
 }

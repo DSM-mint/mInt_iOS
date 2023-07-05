@@ -14,6 +14,8 @@ import RxSwift
 import Core
 import MintKit
 
+
+//2
 public class WriteMoodViewController: UIViewController {
     
     private var moodTitle = UILabel().then {

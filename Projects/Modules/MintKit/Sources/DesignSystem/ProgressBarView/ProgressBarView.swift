@@ -12,7 +12,7 @@ import SnapKit
 open class ProgressBarView: UIView {
   public var ratio: CGFloat = 0.0 {
     didSet {
-      self.isHidden = !self.ratio.isLess(than: 1.0)
+//      self.isHidden = !self.ratio.isLess(than: 1.0) // 없어지는 코드
       
       self.progressBarView.snp.remakeConstraints {
         $0.top.bottom.equalTo(self.safeAreaLayoutGuide)

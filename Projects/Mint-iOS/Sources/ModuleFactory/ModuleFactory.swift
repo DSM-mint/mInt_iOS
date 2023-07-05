@@ -8,6 +8,13 @@ public class ModuleFactory {
 
 @available(iOS 16.0, *)
 extension ModuleFactory: ModuleFactoryInterface {
+    
+    public func writeImageVC() -> Presentation.WriteImageViewController {
+        let writeImageVC = WriteImageViewController()
+        
+        return writeImageVC
+    }
+    
     public func writeMoodVC() -> Presentation.WriteMoodViewController {
         let writeMoodVC = WriteMoodViewController()
         
