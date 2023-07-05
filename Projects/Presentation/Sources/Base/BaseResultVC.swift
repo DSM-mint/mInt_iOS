@@ -24,10 +24,13 @@ public class BaseResultVC: UIViewController {
     
     public var backButton = MintButton(buttonTitle: "나가기", titleColor: MintKitAsset.Colors.mainColor.color, backgroud: .white)
     
+    public var instaButton = MintButton(buttonTitle: "인스타 스토리 공유", titleColor: .white)
+    
     
     func updateWith(_ controller: UIViewController) {
         view.backgroundColor = MintKitAsset.Colors.bkc.color
         layout()
+        instaButton.isHidden = true
     }
     
     public override func viewDidLoad() {
@@ -41,7 +44,8 @@ public class BaseResultVC: UIViewController {
             resultLabel,
             feedbackLabel,
             consultingButton,
-            backButton
+            backButton,
+            instaButton
         ].forEach { view.addSubview($0) }
         
         resultLabel.snp.makeConstraints {
@@ -52,6 +56,13 @@ public class BaseResultVC: UIViewController {
         feedbackLabel.snp.makeConstraints {
             $0.top.equalTo(resultLabel.snp.bottom).offset(10.0)
             $0.centerX.equalToSuperview()
+        }
+        
+        instaButton.snp.makeConstraints {
+            $0.top.equalTo(feedbackLabel.snp.bottom).offset(50.0)
+            $0.leading.equalToSuperview().offset(30.0)
+            $0.trailing.equalToSuperview().inset(30.0)
+            $0.height.equalTo(54.0)
         }
         
         consultingButton.snp.makeConstraints {
