@@ -84,7 +84,7 @@ public class WriteDiaryViewController: UIViewController {
         }
         
         nextButton.snp.makeConstraints {
-            $0.top.equalTo(mintTextView.snp.bottom).offset(192.0)
+            $0.top.equalTo(mintTextView.snp.bottom).offset(150.0)
             $0.leading.equalToSuperview().offset(30.0)
             $0.trailing.equalToSuperview().inset(30.0)
             $0.height.equalTo(54.0)

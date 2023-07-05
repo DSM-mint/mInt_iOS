@@ -77,7 +77,7 @@ public class WriteImageViewController: UIViewController {
         }
         
         okButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(60.0)
+            $0.top.equalTo(addPictureView.snp.bottom).offset(300.0)
             $0.leading.equalToSuperview().offset(30.0)
             $0.trailing.equalToSuperview().inset(30.0)
             $0.height.equalTo(54.0)

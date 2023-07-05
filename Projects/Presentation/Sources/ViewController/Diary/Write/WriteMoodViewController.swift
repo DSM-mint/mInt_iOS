@@ -135,12 +135,12 @@ public class WriteMoodViewController: UIViewController {
         }
         
         moodAddTitle.snp.makeConstraints {
-            $0.top.equalTo(collectionView.snp.bottom).offset(340.0)
+            $0.top.equalTo(collectionView.snp.bottom).offset(280.0)
             $0.leading.equalToSuperview().offset(100.0)
         }
         //나중에 스택으로 묶자
         moodAddButton.snp.makeConstraints {
-            $0.top.equalTo(collectionView.snp.bottom).offset(334.0)
+            $0.top.equalTo(collectionView.snp.bottom).offset(274.0)
             $0.leading.equalTo(moodAddTitle.snp.trailing).offset(10.0)
         }
         
