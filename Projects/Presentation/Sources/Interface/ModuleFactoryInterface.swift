@@ -12,6 +12,7 @@ public protocol ModuleFactoryInterface {
     func diaryVC() -> DiaryViewController
     func artVC() -> ArtViewController
     func detailArtVC() -> DetailArtViewController
+    func editProfileVC() -> EditProfileViewController
 //    func tabBarVC() -> TapBarViewController
 //    func companyListVC() -> CompanyListViewController
 }

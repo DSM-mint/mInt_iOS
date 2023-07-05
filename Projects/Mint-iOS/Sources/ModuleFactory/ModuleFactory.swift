@@ -7,6 +7,13 @@ public class ModuleFactory {
 }
 
 extension ModuleFactory: ModuleFactoryInterface {
+    
+    public func editProfileVC() -> Presentation.EditProfileViewController {
+        let editProfileVC = EditProfileViewController()
+        
+        return editProfileVC
+    }
+    
     public func detailArtVC() -> Presentation.DetailArtViewController {
         let detailArtVC = DetailArtViewController()
         
