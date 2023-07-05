@@ -21,23 +21,41 @@ class TagCell: UICollectionViewCell {
     
     let tagLabel = UILabel().then {
         $0.font = .systemFont(ofSize: 14)
-        $0.textColor = .gray
+        $0.textColor = MintKitAsset.Colors.mainColor.color
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         contentView.addSubview(tagLabel)
-        contentView.backgroundColor = .systemGray5
+        contentView.backgroundColor = MintKitAsset.Colors.bkc.color
+        contentView.layer.borderWidth = 1
+        contentView.layer.borderColor = MintKitAsset.Colors.mainColor.color.cgColor
         contentView.layer.masksToBounds = true
-        contentView.layer.cornerRadius = 4
+        contentView.layer.cornerRadius = 15
         
         setConstraint()
     }
     
+    override var isSelected: Bool {
+        didSet {
+            updateSelectedState()
+        }
+    }
+
     func setConstraint() {
         tagLabel.snp.makeConstraints {
             $0.center.equalToSuperview()
+        }
+    }
+    
+    func updateSelectedState() {
+        if isSelected {
+            contentView.backgroundColor = MintKitAsset.Colors.mainColor.color
+            tagLabel.textColor = MintKitAsset.Colors.bkc.color
+        } else {
+            contentView.backgroundColor = MintKitAsset.Colors.bkc.color
+            tagLabel.textColor = MintKitAsset.Colors.mainColor.color
         }
     }
     

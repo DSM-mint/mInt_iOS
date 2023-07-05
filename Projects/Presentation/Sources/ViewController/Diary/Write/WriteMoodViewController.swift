@@ -16,39 +16,68 @@ import MintKit
 
 public class WriteMoodViewController: UIViewController {
     
+    private var moodTitle = UILabel().then {
+        $0.text = "오늘 기분은 어떠세요?"
+        $0.textColor = .white
+        $0.font = .systemFont(ofSize: 20.0, weight: .bold)
+    }
+    
+    private var moodAddTitle = UILabel().then {
+        $0.text = "오늘 기분은 어떠세요?"
+        $0.textColor = MintKitAsset.Colors.gary300.color
+        $0.font = .systemFont(ofSize: 16.0, weight: .bold)
+    }
+    
+    private var moodAddButton = UIButton().then {
+        $0.setTitle("감정 추가하기", for: .normal)
+        $0.setTitleColor(MintKitAsset.Colors.gary300.color, for: .normal)
+        $0.titleLabel?.font = .systemFont(ofSize: 16.0, weight: .bold)
+    }
+    
+    private var backButton = MintButton(buttonTitle: "이전 단계", titleColor: MintKitAsset.Colors.mainColor.color, backgroud: .white)
+    private var nextButton = MintButton(buttonTitle: "다음 단계", titleColor: .white)
+    
+    private let progressBarView = ProgressBarView()
+
     let tagList: [String] = [
-        "개발자아라찌",
-        "Then",
-        "SnapKit",
-        "RxSwift",
-        "Viper",
-        "Swift",
-        "UIKit",
-        "Foundation",
-        "ReactorKit"
+        "기뻐요",
+        "슬퍼요",
+        "행복해요",
+        "즐거워요",
+        "분해요",
+        "기대돼요",
+        "걱정돼요",
+        "실망스러워요",
+        "억울해요",
+        "감동적이에요"
     ]
     
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
         let layout = LeftAlignedCollectionViewFlowLayout()
-        layout.minimumLineSpacing = 3
-        layout.minimumInteritemSpacing = 3
+        layout.minimumLineSpacing = 10
+        layout.minimumInteritemSpacing = 18
         layout.sectionInset = UIEdgeInsets(top: 5, left: 2, bottom: 5, right: 2)
         
         $0.isScrollEnabled = false
         $0.collectionViewLayout = layout
-        $0.backgroundColor = .systemBackground
+        $0.backgroundColor = MintKitAsset.Colors.bkc.color
         $0.register(TagCell.self, forCellWithReuseIdentifier: TagCell.id)
     }
     
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.collectionView.delegate = self
+        view.backgroundColor = MintKitAsset.Colors.bkc.color
         
-        self.view.addSubview(collectionView)
-        
-        setConstraint()
         self.collectionView.dataSource = self
+        self.collectionView.delegate = self
+        layout()
+        
+        var timer = 0.0
+        let finish = 3.0
+        timer += 2
+        self.progressBarView.ratio = timer / finish
+        collectionView.allowsMultipleSelection = true
     }
     
     public override func loadView() {
@@ -57,10 +86,56 @@ public class WriteMoodViewController: UIViewController {
         self.view = view
     }
     
-    func setConstraint() {
+    func layout() {
+        view.addSubview(moodTitle)
+        view.addSubview(progressBarView)
+        self.view.addSubview(collectionView)
+        view.addSubview(moodAddTitle)
+        view.addSubview(moodAddButton)
+        view.addSubview(backButton)
+        view.addSubview(nextButton)
+        
+        moodTitle.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(50.0)
+            $0.leading.equalToSuperview().offset(30.0)
+        }
+        
+        progressBarView.snp.makeConstraints {
+            $0.top.equalTo(moodTitle.snp.bottom).offset(20.0)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(4.0)
+            $0.width.equalTo(370.0)
+        }
+        
         collectionView.snp.makeConstraints {
-            $0.center.width.equalToSuperview()
-            $0.height.equalTo(100)
+            $0.top.equalTo(progressBarView.snp.bottom).offset(35.0)
+            $0.leading.equalToSuperview().offset(30.0)
+            $0.trailing.equalToSuperview().inset(30.0)
+            $0.height.equalTo(200)
+        }
+        
+        moodAddTitle.snp.makeConstraints {
+            $0.top.equalTo(collectionView.snp.bottom).offset(340.0)
+            $0.leading.equalToSuperview().offset(100.0)
+        }
+        //나중에 스택으로 묶자
+        moodAddButton.snp.makeConstraints {
+            $0.top.equalTo(collectionView.snp.bottom).offset(334.0)
+            $0.leading.equalTo(moodAddTitle.snp.trailing).offset(10.0)
+        }
+        
+        backButton.snp.makeConstraints {
+            $0.top.equalTo(moodAddButton.snp.bottom).offset(12.0)
+            $0.leading.equalToSuperview().offset(30.0)
+            $0.height.equalTo(54.0)
+            $0.width.equalTo(180.0)
+        }
+        
+        nextButton.snp.makeConstraints {
+            $0.top.equalTo(moodAddButton.snp.bottom).offset(12.0)
+            $0.trailing.equalToSuperview().inset(30.0)
+            $0.height.equalTo(54.0)
+            $0.width.equalTo(180.0)
         }
     }
 }
@@ -80,7 +155,13 @@ extension WriteMoodViewController: UICollectionViewDataSource {
     }
     
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.row)
+        let cell = collectionView.cellForItem(at: indexPath) as? TagCell
+        cell?.isSelected = true
+    }
+
+    public func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as? TagCell
+        cell?.isSelected = false
     }
 }
 
@@ -94,6 +175,6 @@ extension WriteMoodViewController: UICollectionViewDelegateFlowLayout {
         }
         let size = label.frame.size
         
-        return CGSize(width: size.width + 16, height: size.height + 10)
+        return CGSize(width: size.width + 34, height: size.height + 15)
     }
 }
