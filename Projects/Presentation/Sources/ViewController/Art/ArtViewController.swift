@@ -16,6 +16,7 @@ import RxCocoa
 
 public class ArtViewController: UIViewController {
     
+    
     var disposebag = DisposeBag()
     
     lazy var navLabel = UILabel().then {
@@ -67,6 +68,12 @@ public class ArtViewController: UIViewController {
         musicalView = MintCollectionView(dataSource: dataSource)
         theaterView = MintCollectionView(dataSource: dataSource)
         exhibitionView = MintCollectionView(dataSource: dataSource)
+        
+        concertCollectionView.delegate = self
+        musicalView.delegate = self
+        theaterView.delegate = self
+        exhibitionView.delegate = self
+        
         view.backgroundColor = MintKitAsset.Colors.bkc.color
         
         navigationController?.navigationBar.isTranslucent = false
@@ -168,4 +175,14 @@ public class ArtViewController: UIViewController {
         self.navigationItem.leftBarButtonItems = [leftSpace, leftItem]
         self.navigationItem.leftItemsSupplementBackButton = true
     }
+}
+
+extension ArtViewController: MintCollectionViewDelegate {
+    
+    public func didSelectItemAt(_ collectionView: MintKit.MintCollectionView, indexPath: IndexPath) {
+        print(indexPath.row)
+        self.modalPresentationStyle = .fullScreen
+        self.navigationController?.pushViewController(DetailArtViewController(), animated: true)
+    }
+    
 }

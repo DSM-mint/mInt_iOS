@@ -7,6 +7,12 @@ public class ModuleFactory {
 }
 
 extension ModuleFactory: ModuleFactoryInterface {
+    public func detailArtVC() -> Presentation.DetailArtViewController {
+        let detailArtVC = DetailArtViewController()
+        
+        return detailArtVC
+    }
+    
     public func artVC() -> Presentation.ArtViewController {
         let artVC = ArtViewController()
         

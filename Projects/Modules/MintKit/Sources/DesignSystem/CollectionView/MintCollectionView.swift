@@ -5,7 +5,13 @@ import RxCocoa
 import RxSwift
 import Core
 
+public protocol MintCollectionViewDelegate: AnyObject {
+    func didSelectItemAt(_ collectionView: MintCollectionView, indexPath: IndexPath)
+}
+
 open class MintCollectionView: UIView {
+    
+    public weak var delegate: MintCollectionViewDelegate?
     
     var collectionView: UICollectionView!
     var dataSource: [MyModel] = []
@@ -84,5 +90,11 @@ extension MintCollectionView: UICollectionViewDelegate, UICollectionViewDataSour
             }
         }
         return cell
+    }
+}
+
+extension MintCollectionView {
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate?.didSelectItemAt(self, indexPath: indexPath)
     }
 }
