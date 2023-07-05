@@ -46,7 +46,7 @@ public class BadResultViewController: BaseResultVC {
     }
     
     func shareToInstagramStory(with image: UIImage, to viewController: UIViewController) {
-        guard let storyShareURL = URL(string: "instagram-stories://share") else {
+        guard let storyShareURL = URL(string: "instagram-stories://share?source_application=660435899280434") else {
             return
         }
         guard UIApplication.shared.canOpenURL(storyShareURL) else {

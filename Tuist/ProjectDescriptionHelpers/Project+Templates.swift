@@ -77,7 +77,7 @@ public extension Project {
             "NSAppTransportSecurity": ["NSAllowsArbitraryLoads": true],
             "ITSAppUsesNonExemptEncryption": false,
             "UIBackgroundModes": ["fetch", "remote-notification"],
-            "UIUserInterfaceStyle": "Light"
+            "UIUserInterfaceStyle": "Dark"
         ]
 }
 

@@ -35,7 +35,7 @@ open class CalendarView: UIView {
             $0.height.equalTo(450.0)
             $0.width.equalTo(370.0)
         }
-        calendarView.backgroundColor = .systemBackground
+        calendarView.backgroundColor = MintKitAsset.Colors.gary800.color
         calendarView.layer.cornerCurve = .continuous
         calendarView.layer.cornerRadius = 10.0
         calendarView.tintColor = MintKitAsset.Colors.mainColor.color
