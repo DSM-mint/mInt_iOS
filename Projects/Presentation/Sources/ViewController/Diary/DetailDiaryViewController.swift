@@ -26,7 +26,7 @@ public class DetailDiaryViewController: UIViewController {
         $0.text = "오늘은 전시회를 다녀왔는데 \n제가 좋아하는 작가의 작품이 있어서 너무 좋았습니다.\n\n내년에 한 번 더 전시회 진행하면 가보려구요"
     }
     
-    let tagList: [String] = [
+    var tagList: [String] = [
         "기뻐요",
         "슬퍼요",
         "행복해요",
@@ -51,12 +51,13 @@ public class DetailDiaryViewController: UIViewController {
         $0.register(TagCell.self, forCellWithReuseIdentifier: TagCell.id)
     }
     
-    public init(mainTitleText: String, mainImage: UIImage, subTitleText: String) {
+    public init(mainTitleText: String, mainImage: UIImage, subTitleText: String, tagList: [String]) {
         super.init(nibName: nil, bundle: nil)
         
         self.mainTitle.text = mainTitleText
         self.mainImageView.image = mainImage
         self.subTitle.text = subTitleText
+        self.tagList = tagList
     }
 
     required init?(coder aDecoder: NSCoder) {

@@ -78,26 +78,23 @@ public class DiaryViewController: UIViewController, DiaryCollectionViewDelegate 
             
             switch indexPath.row {
             case 0:
-                let detailArtVC = DetailDiaryViewController(mainTitleText: "잠 못드는 날", mainImage: MintKitAsset.Assets.testImage2.image, subTitleText: "해커톤이 나를 이렇게 만들었어!")
+                let detailArtVC = DetailDiaryViewController(mainTitleText: "잠 못드는 날", mainImage: MintKitAsset.Assets.testImage2.image, subTitleText: "해커톤이 나를 이렇게 만들었어!", tagList: ["걱정돼요", "억울해요", "분해요"])
             
                 navigationController?.pushViewController(detailArtVC, animated: true)
-                print("1")
                 return
             case 1:
-                mainTitleText = "깃허브 커밋 못한 날"
-                subTitleText = "실수로 커밋을 하지 못하였다."
-                mainImage = MintKitAsset.Assets.testImage2.image
+                let detailArtVC = DetailDiaryViewController(mainTitleText: "커밋 못한 날", mainImage: MintKitAsset.Assets.testImage2.image, subTitleText: "실수로 커밋을 하지 못했습니다.", tagList: ["화가나요", "억울해요", "실망스러워요", "슬퍼요"])
+            
+                navigationController?.pushViewController(detailArtVC, animated: true)
             case 2:
-                mainTitleText = "해커톤 발표 날"
-                subTitleText = "하하"
-                mainImage = MintKitAsset.Assets.paintingLogo.image
+                let detailArtVC = DetailDiaryViewController(mainTitleText: "해커톤 발표 날", mainImage: MintKitAsset.Assets.testImage2.image, subTitleText: "하하", tagList:[ "기뻐요", "행복해요", "즐거워요", "기대돼요", "감동적이에요"])
+            
+                navigationController?.pushViewController(detailArtVC, animated: true)
             default:
                 print("없음")
                 return
             }
-            
-            let detailDiaryViewController = DetailDiaryViewController(mainTitleText: mainTitleText, mainImage: mainImage!, subTitleText: subTitleText)
-            navigationController?.pushViewController(detailDiaryViewController, animated: true)
+            print("asdf")
         }
     
     @objc func buttonDidTap() {
