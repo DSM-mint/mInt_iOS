@@ -91,6 +91,8 @@ public class MainViewController: UIViewController {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 16
+        
+        let sView = UIView()
         scrollView.addSubview(stackView)
 
         stackView.snp.makeConstraints {
@@ -106,6 +108,10 @@ public class MainViewController: UIViewController {
         calendarView.snp.makeConstraints {
             $0.width.equalTo(370.0)
             $0.height.equalTo(450.0)
+        }
+        stackView.addArrangedSubview(sView)
+        sView.snp.makeConstraints{
+            $0.height.equalTo(30.0)
         }
         
         stackView.addArrangedSubview(artLabel)
