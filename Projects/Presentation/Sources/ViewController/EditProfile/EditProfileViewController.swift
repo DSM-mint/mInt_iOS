@@ -1,11 +1,3 @@
-//
-//  EditProfileViewController.swift
-//  MintKit
-//
-//  Created by 박준하 on 2023/07/05.
-//  Copyright © 2023 Mint-iOS. All rights reserved.
-//
-
 import UIKit
 import SnapKit
 import Then
@@ -34,7 +26,7 @@ public class EditProfileViewController: UIViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        
         title = "프로필 수정"
         
         mintThreeTextField.textField1.text = "\(name)"
@@ -53,10 +45,8 @@ public class EditProfileViewController: UIViewController {
         
         okButton.rx.tap
             .subscribe(with: self, onNext: { owner, _  in
-                if let newName = self.mintThreeTextField.textField1.text {
-                    self.delegate?.userProfileDataChanged(newName: newName)
-                }
-                self.dismiss(animated: true, completion: nil)
+                self.delegate?.userProfileDataChanged(newName: self.mintThreeTextField.textField1.text!)
+
                 guard let viewControllerStack = self.navigationController?.viewControllers else { return }
                 for viewController in viewControllerStack {
                     if let bView = viewController as? UserViewController {

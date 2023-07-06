@@ -7,7 +7,7 @@ import RxSwift
 import RxCocoa
 
 @available(iOS 16.0, *)
-public class MainViewController: UIViewController, UserViewControllerDelegate {
+public class MainViewController: UIViewController {
     
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -72,8 +72,6 @@ public class MainViewController: UIViewController, UserViewControllerDelegate {
             $0.right.equalToSuperview()
             $0.height.equalTo(550)
         }
-        let editProfileVC = EditProfileViewController()
-        editProfileVC.delegate = self
         setupNev()
         setup()
         layout()
@@ -82,11 +80,6 @@ public class MainViewController: UIViewController, UserViewControllerDelegate {
         tabBarController?.tabBar.barTintColor = MintKitAsset.Colors.bkc.color
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barTintColor = MintKitAsset.Colors.bkc.color
-    }
-    
-    func userProfileDataChanged(newName: String) {
-        name = newName
-        updateWelcomeLabel(with: name)
     }
     
     private func updateWelcomeLabel(with name: String) {
