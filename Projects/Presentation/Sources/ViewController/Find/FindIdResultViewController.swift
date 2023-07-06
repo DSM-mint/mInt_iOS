@@ -19,12 +19,12 @@ public class FindIdResultViewController: UIViewController {
         $0.font = .systemFont(ofSize: 20.0, weight: .bold)
         let string = "회원님의 아이디는 junha입니다."
         let attributedString = NSMutableAttributedString(string: string)
-
+        
         if let nameRange = string.range(of: "junha") {
             let nsRange = NSRange(nameRange, in: string)
             attributedString.addAttribute(.foregroundColor, value: MintKitAsset.Colors.mainColor.color, range: nsRange)
         }
-
+        
         if let otherTextRange = string.range(of: "회원님의 아이디는") {
             let nsRange = NSRange(otherTextRange, in: string)
             attributedString.addAttribute(.foregroundColor, value: UIColor.white, range: nsRange)
@@ -34,7 +34,7 @@ public class FindIdResultViewController: UIViewController {
             let nsRange = NSRange(otherTextRange, in: string)
             attributedString.addAttribute(.foregroundColor, value: UIColor.white, range: nsRange)
         }
-
+        
         $0.attributedText = attributedString
     }
     
@@ -49,12 +49,16 @@ public class FindIdResultViewController: UIViewController {
         $0.setTitleColor(MintKitAsset.Colors.gary500.color, for: .normal)
         $0.titleLabel?.font = .systemFont(ofSize: 15.0)
     }
-
+    
     public override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = MintKitAsset.Colors.bkc.color
         layout()
+        
+        let logoTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(logoTapped))
+        mintTitleLogo.isUserInteractionEnabled = true
+        mintTitleLogo.addGestureRecognizer(logoTapGestureRecognizer)
         
         gotoLoginButton.rx.tap
             .subscribe(with: self, onNext: { owner, _  in
@@ -67,6 +71,16 @@ public class FindIdResultViewController: UIViewController {
                 self.modalPresentationStyle = .fullScreen
                 self.navigationController?.pushViewController(FindPassswordViewController(), animated: true)
             }).disposed(by: disposeBag)
+    }
+    
+    @objc func logoTapped() {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.mintTitleLogo.center.x += self.view.bounds.width
+        }, completion: { _ in
+            self.mintTitleLogo.isHidden = true
+            //             필요하다면 이미지 뷰를 다른 위치로 되돌릴 수 있습니다.
+            //             self.mintTitleLogo.center.x -= self.view.bounds.width
+        })
     }
     
     func layout() {

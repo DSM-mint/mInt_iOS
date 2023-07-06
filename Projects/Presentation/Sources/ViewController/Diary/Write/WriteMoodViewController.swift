@@ -36,7 +36,7 @@ public class WriteMoodViewController: UIViewController {
     
     private let progressBarView = ProgressBarView()
 
-    let tagList: [String] = [
+    private(set) var tagList: [String] = [
         "기뻐요",
         "슬퍼요",
         "행복해요",
@@ -93,6 +93,22 @@ public class WriteMoodViewController: UIViewController {
                     }
                 }
             }).disposed(by: disposeBag)
+        
+        moodAddButton.rx.tap
+            .subscribe(with: self, onNext: { owner, _ in
+                let emotionVC = EmotionViewController()
+                emotionVC.delegate = self
+                self.navigationController?.pushViewController(emotionVC, animated: true)
+            }).disposed(by: disposeBag)
+    }
+    
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let addedEmotion = (navigationController?.viewControllers.last as? EmotionViewController)?.addedEmotion {
+            tagList.append(addedEmotion)
+            collectionView.reloadData()
+        }
     }
     
     public override func loadView() {
@@ -196,5 +212,13 @@ extension WriteMoodViewController: UICollectionViewDelegateFlowLayout {
         let size = label.frame.size
         
         return CGSize(width: size.width + 34, height: size.height + 15)
+    }
+}
+
+@available(iOS 16.0, *)
+extension WriteMoodViewController: EmotionDelegate {
+    public func didAddEmotion(emotion: String) {
+        tagList.append(emotion)
+        collectionView.reloadData()
     }
 }

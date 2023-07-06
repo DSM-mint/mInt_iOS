@@ -7,7 +7,13 @@ public class ModuleFactory {
 }
 
 @available(iOS 16.0, *)
-extension ModuleFactory: ModuleFactoryInterface {    
+extension ModuleFactory: ModuleFactoryInterface {
+    public func emotionVC() -> Presentation.EmotionViewController {
+        let emotionVC = EmotionViewController()
+        
+        return emotionVC
+    }
+    
     
     public func writeImageVC() -> Presentation.WriteImageViewController {
         let writeImageVC = WriteImageViewController()
@@ -36,7 +42,7 @@ extension ModuleFactory: ModuleFactoryInterface {
     
 //    public func detailArtVC() -> Presentation.DetailArtViewController {
 //        let detailArtVC = DetailArtViewController()
-//        
+//
 //        return detailArtVC
 //    }
     

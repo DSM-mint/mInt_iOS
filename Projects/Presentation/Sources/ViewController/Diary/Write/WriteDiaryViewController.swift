@@ -42,7 +42,52 @@ public class WriteDiaryViewController: UIViewController {
             .subscribe(with: self, onNext: { owner, _  in
                 self.navigationController?.pushViewController(WriteMoodViewController(), animated: true)
             }).disposed(by: disposeBag)
+        setupKeyboardObservers()
         
+    }
+    
+    private func setupKeyboardObservers() {
+        NotificationCenter.default.rx.notification(UIResponder.keyboardWillShowNotification)
+            .subscribe(onNext: { [weak self] notification in
+                self?.keyboardWillShow(notification: notification)
+            })
+            .disposed(by: disposeBag)
+
+        NotificationCenter.default.rx.notification(UIResponder.keyboardWillHideNotification)
+            .subscribe(onNext: { [weak self] notification in
+                self?.keyboardWillHide(notification: notification)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    @objc private func keyboardWillShow(notification: Notification) {
+        guard let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+        let keyboardRectangle = keyboardFrame.cgRectValue
+        let keyboardHeight = keyboardRectangle.height
+        
+        view.frame.origin.y = 0 - keyboardHeight * 0.3
+    }
+
+    @objc private func keyboardWillHide(notification: Notification) {
+        view.frame.origin.y = 0
+    }
+    
+    private func shakePaintingLogo() {
+        let shakeAnimation = CABasicAnimation(keyPath: "position")
+        shakeAnimation.duration = 0.1
+        shakeAnimation.repeatCount = 5
+        shakeAnimation.autoreverses = true
+        
+        let fromPoint = CGPoint(x: mainTextField.center.x - 5, y: mainTextField.center.y)
+        let fromValue = NSValue(cgPoint: fromPoint)
+        
+        let toPoint = CGPoint(x: mainTextField.center.x + 5, y: mainTextField.center.y)
+        let toValue = NSValue(cgPoint: toPoint)
+        
+        shakeAnimation.fromValue = fromValue
+        shakeAnimation.toValue = toValue
+        
+        self.writeTitle.layer.add(shakeAnimation, forKey: "position")
     }
     
     func layout() {
