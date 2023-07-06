@@ -31,11 +31,19 @@ open class MyCell: UICollectionViewCell {
         
         return label
     }()
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-
         setupView()
+    }
+
+    init(frame: CGRect, containerViewImage: UIImage, titleLabelText: String, subLabelText: String) {
+        super.init(frame: frame)
+        
+        setupView()
+        containerView.image = containerViewImage
+        titleLabel.text = titleLabelText
+        subLabel.text = subLabelText
     }
 
     @available(*, unavailable)

@@ -12,7 +12,7 @@ public protocol ModuleFactoryInterface {
     func resultVC() -> BadResultViewController
     func diaryVC() -> DiaryViewController
     func artVC() -> ArtViewController
-    func detailArtVC() -> DetailArtViewController
+//    func detailArtVC() -> DetailArtViewController
     func editProfileVC() -> EditProfileViewController
     func writeDiaryVC() -> WriteDiaryViewController
     func writeMoodVC() -> WriteMoodViewController

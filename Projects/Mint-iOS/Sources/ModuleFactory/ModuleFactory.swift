@@ -34,11 +34,11 @@ extension ModuleFactory: ModuleFactoryInterface {
         return editProfileVC
     }
     
-    public func detailArtVC() -> Presentation.DetailArtViewController {
-        let detailArtVC = DetailArtViewController()
-        
-        return detailArtVC
-    }
+//    public func detailArtVC() -> Presentation.DetailArtViewController {
+//        let detailArtVC = DetailArtViewController()
+//        
+//        return detailArtVC
+//    }
     
     public func artVC() -> Presentation.ArtViewController {
         let artVC = ArtViewController()

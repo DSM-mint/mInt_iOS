@@ -209,7 +209,98 @@ extension ArtViewController: MintCollectionViewDelegate {
     public func didSelectItemAt(_ collectionView: MintKit.MintCollectionView, indexPath: IndexPath) {
         print(indexPath.row)
         self.modalPresentationStyle = .fullScreen
-        self.navigationController?.pushViewController(DetailArtViewController(), animated: true)
+        
+        if collectionView == concertCollectionView {
+            switch indexPath.row {
+            case 0:
+                let vc = DetailArtViewController(mainTitleText: "카더가든 콘서트", subTitleText: "계속 듣고 싶은 콘서트 😃", imageView: MintKitAsset.Assets.asdfImage1.image)
+                
+                self.navigationController?.pushViewController(vc, animated: true)
+            case 1:
+                let vc = DetailArtViewController(mainTitleText: "10cm 콘서트", subTitleText: "사랑을 전해보는 콘서트 💋", imageView: MintKitAsset.Assets.asdfImage4.image)
+                
+                self.navigationController?.pushViewController(vc, animated: true)
+            case 2:
+                let vc = DetailArtViewController(mainTitleText: "라우브 내한공연", subTitleText: "티켓팅이 어려운 콘서트 🤬", imageView: MintKitAsset.Assets.asdfImage2.image)
+                
+                self.navigationController?.pushViewController(vc, animated: true)
+            case 3:
+                let vc = DetailArtViewController(mainTitleText: "찰리푸스 콘서트", subTitleText: "찌질한 전남친 컨셉 콘서트 🥺", imageView: MintKitAsset.Assets.asdfImage3.image)
+                
+                self.navigationController?.pushViewController(vc, animated: true)
+            default:
+                print("asdf")
+            }
+        }
+        if collectionView == musicalView {
+            switch indexPath.row {
+            case 0:
+                let vc = DetailArtViewController(mainTitleText: "카더가든 콘서트", subTitleText: "계속 듣고 싶은 콘서트 😃", imageView: MintKitAsset.Assets.asdfImage1.image)
+                
+                self.navigationController?.pushViewController(vc, animated: true)
+            case 1:
+                let vc = DetailArtViewController(mainTitleText: "10cm 콘서트", subTitleText: "사랑을 전해보는 콘서트 💋", imageView: MintKitAsset.Assets.asdfImage4.image)
+                
+                self.navigationController?.pushViewController(vc, animated: true)
+            case 2:
+                let vc = DetailArtViewController(mainTitleText: "라우브 내한공연", subTitleText: "티켓팅이 어려운 콘서트 🤬", imageView: MintKitAsset.Assets.asdfImage2.image)
+                
+                self.navigationController?.pushViewController(vc, animated: true)
+            case 3:
+                let vc = DetailArtViewController(mainTitleText: "찰리푸스 콘서트", subTitleText: "찌질한 전남친 컨셉 콘서트 🥺", imageView: MintKitAsset.Assets.asdfImage3.image)
+                
+                self.navigationController?.pushViewController(vc, animated: true)
+            default:
+                print("asdf")
+            }
+        }
+        
+        if collectionView == theaterView {
+            switch indexPath.row {
+            case 0:
+                let vc = DetailArtViewController(mainTitleText: "카더가든 콘서트", subTitleText: "계속 듣고 싶은 콘서트 😃", imageView: MintKitAsset.Assets.asdfImage1.image)
+                
+                self.navigationController?.pushViewController(vc, animated: true)
+            case 1:
+                let vc = DetailArtViewController(mainTitleText: "10cm 콘서트", subTitleText: "사랑을 전해보는 콘서트 💋", imageView: MintKitAsset.Assets.asdfImage4.image)
+                
+                self.navigationController?.pushViewController(vc, animated: true)
+            case 2:
+                let vc = DetailArtViewController(mainTitleText: "라우브 내한공연", subTitleText: "티켓팅이 어려운 콘서트 🤬", imageView: MintKitAsset.Assets.asdfImage2.image)
+                
+                self.navigationController?.pushViewController(vc, animated: true)
+            case 3:
+                let vc = DetailArtViewController(mainTitleText: "찰리푸스 콘서트", subTitleText: "찌질한 전남친 컨셉 콘서트 🥺", imageView: MintKitAsset.Assets.asdfImage3.image)
+                
+                self.navigationController?.pushViewController(vc, animated: true)
+            default:
+                print("asdf")
+            }
+        }
+        
+        if collectionView == exhibitionView {
+            switch indexPath.row {
+            case 0:
+                let vc = DetailArtViewController(mainTitleText: "카더가든 콘서트", subTitleText: "계속 듣고 싶은 콘서트 😃", imageView: MintKitAsset.Assets.asdfImage1.image)
+                
+                self.navigationController?.pushViewController(vc, animated: true)
+            case 1:
+                let vc = DetailArtViewController(mainTitleText: "10cm 콘서트", subTitleText: "사랑을 전해보는 콘서트 💋", imageView: MintKitAsset.Assets.asdfImage4.image)
+                
+                self.navigationController?.pushViewController(vc, animated: true)
+            case 2:
+                let vc = DetailArtViewController(mainTitleText: "라우브 내한공연", subTitleText: "티켓팅이 어려운 콘서트 🤬", imageView: MintKitAsset.Assets.asdfImage2.image)
+                
+                self.navigationController?.pushViewController(vc, animated: true)
+            case 3:
+                let vc = DetailArtViewController(mainTitleText: "찰리푸스 콘서트", subTitleText: "찌질한 전남친 컨셉 콘서트 🥺", imageView: MintKitAsset.Assets.asdfImage3.image)
+                
+                self.navigationController?.pushViewController(vc, animated: true)
+            default:
+                print("asdf")
+            }
+        }
+       
     }
     
 }
