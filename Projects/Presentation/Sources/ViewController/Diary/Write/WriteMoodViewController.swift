@@ -6,7 +6,6 @@ import RxSwift
 import Core
 import MintKit
 
-
 //2
 @available(iOS 16.0, *)
 public class WriteMoodViewController: UIViewController {

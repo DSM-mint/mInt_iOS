@@ -27,10 +27,10 @@ public class BaseFindVC: UIViewController {
     
     func updateWith(_ controller: UIViewController) {
         view.backgroundColor = MintKitAsset.Colors.bkc.color
+        view.addSubview(paintingLogo)
         view.addSubview(mintFindTextField)
         view.addSubview(certificationOneTextField)
         view.addSubview(mainButton)
-        view.addSubview(paintingLogo)
         
         mintFindTextField.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(80.0)

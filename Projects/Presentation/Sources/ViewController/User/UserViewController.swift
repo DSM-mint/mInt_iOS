@@ -11,6 +11,7 @@ protocol UserViewControllerDelegate: AnyObject {
 }
 var name: String = "박준하"
 
+@available(iOS 16.0, *)
 public class UserViewController: UIViewController, UserViewControllerDelegate {
     
     var disposeBag = DisposeBag()

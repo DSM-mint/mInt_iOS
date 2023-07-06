@@ -14,6 +14,7 @@ import MintKit
 import RxSwift
 import RxCocoa
 
+@available(iOS 16.0, *)
 public class ChangePasswordCertificationViewController: BaseFindVC {
     
     var disposeBag = DisposeBag()
@@ -22,13 +23,17 @@ public class ChangePasswordCertificationViewController: BaseFindVC {
         super.viewDidLoad()
         
         title = "비밀번호 변경하기"
+        
         updateWith(self)
         mainButton.setTitle("비밀번호 재설정", for: .normal)
         
         mainButton.rx.tap
             .subscribe(with: self, onNext: { owner, _ in
-                self.navigationController?.pushViewController(ChangePasswordViewController(), animated: true)
-            }).disposed(by: disposeBag)
+                self.present(LoginViewController(), animated: true)
+            })
+        
+        mintFindTextField.textField1.isSecureTextEntry = true
+
         
         mintFindTextField.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(80.0)
@@ -52,11 +57,7 @@ public class ChangePasswordCertificationViewController: BaseFindVC {
             $0.height.equalTo(54.0)
         }
         
-        paintingLogo.snp.makeConstraints {
-            $0.top.equalTo(mainButton.snp.bottom).offset(60.0)
-            $0.trailing.equalToSuperview().offset(120.0)
-            $0.height.width.equalTo(306.0)
-        }
+        paintingLogo.removeFromSuperview()
     }
     
     public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){

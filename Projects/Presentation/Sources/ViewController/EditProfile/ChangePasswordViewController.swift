@@ -14,7 +14,8 @@ import RxCocoa
 import UIKit
 
 public class ChangePasswordViewController: UIViewController {
-    
+    var disposeBag = DisposeBag()
+
     var passwordTextFieldView = MintTwoTextField(placeholder1: "새로운 비밀번호를 입력하세요", placeholder2: "비밀번호 확인")
     var passwordResetButton = MintButton(buttonTitle: "비밀번호 재설정", titleColor: .white)
     
@@ -23,6 +24,11 @@ public class ChangePasswordViewController: UIViewController {
         
         view.backgroundColor = MintKitAsset.Colors.bkc.color
         layout()
+        
+        passwordResetButton.rx.tap
+            .subscribe(with: self, onNext: { owner, _ in
+                self.dismiss(animated: true)
+            }).disposed(by: disposeBag)
     }
     
     func layout() {
