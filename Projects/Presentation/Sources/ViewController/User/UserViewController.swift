@@ -9,7 +9,6 @@ import RxCocoa
 protocol UserViewControllerDelegate: AnyObject {
     func userProfileDataChanged(newName: String)
 }
-
 var name: String = "박준하"
 
 public class UserViewController: UIViewController, UserViewControllerDelegate {

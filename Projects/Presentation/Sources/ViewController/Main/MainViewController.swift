@@ -7,7 +7,7 @@ import RxSwift
 import RxCocoa
 
 @available(iOS 16.0, *)
-public class MainViewController: UIViewController {
+public class MainViewController: UIViewController, UserViewControllerDelegate {
     
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -21,10 +21,10 @@ public class MainViewController: UIViewController {
     private var welcomeLabel = UILabel().then {
         $0.numberOfLines = 0
         $0.font = .systemFont(ofSize: 20.0, weight: .bold)
-        let string = "박준하 님,\n오늘 하루는 어떠셨나요"
+        let string = "\(name) 님,\n오늘 하루는 어떠셨나요"
         let attributedString = NSMutableAttributedString(string: string)
         
-        if let nameRange = string.range(of: "박준하") {
+        if let nameRange = string.range(of: "\(name)") {
             let nsRange = NSRange(nameRange, in: string)
             attributedString.addAttribute(.foregroundColor, value: MintKitAsset.Colors.mainColor.color, range: nsRange)
         }
@@ -72,6 +72,8 @@ public class MainViewController: UIViewController {
             $0.right.equalToSuperview()
             $0.height.equalTo(550)
         }
+        let editProfileVC = EditProfileViewController()
+        editProfileVC.delegate = self
         setupNev()
         setup()
         layout()
@@ -81,6 +83,29 @@ public class MainViewController: UIViewController {
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barTintColor = MintKitAsset.Colors.bkc.color
     }
+    
+    func userProfileDataChanged(newName: String) {
+        name = newName
+        updateWelcomeLabel(with: name)
+    }
+    
+    private func updateWelcomeLabel(with name: String) {
+        let string = "\(name) 님,\n안녕하세요~!"
+        let attributedString = NSMutableAttributedString(string: string)
+
+        if let nameRange = string.range(of: "\(name)") {
+            let nsRange = NSRange(nameRange, in: string)
+            attributedString.addAttribute(.foregroundColor, value: MintKitAsset.Colors.mainColor.color, range: nsRange)
+        }
+
+        if let otherTextRange = string.range(of: " 님,\n안녕하세요~!") {
+            let nsRange = NSRange(otherTextRange, in: string)
+            attributedString.addAttribute(.foregroundColor, value: UIColor.white, range: nsRange)
+        }
+
+        welcomeLabel.attributedText = attributedString
+    }
+    
     
     func layout() {
         

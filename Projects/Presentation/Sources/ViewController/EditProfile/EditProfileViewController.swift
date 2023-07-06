@@ -52,8 +52,10 @@ public class EditProfileViewController: UIViewController {
         
         okButton.rx.tap
             .subscribe(with: self, onNext: { owner, _  in
-                self.delegate?.userProfileDataChanged(newName: self.mintThreeTextField.textField1.text!)
-
+                if let newName = self.mintThreeTextField.textField1.text {
+                    self.delegate?.userProfileDataChanged(newName: newName)
+                }
+                self.dismiss(animated: true, completion: nil)
                 guard let viewControllerStack = self.navigationController?.viewControllers else { return }
                 for viewController in viewControllerStack {
                     if let bView = viewController as? UserViewController {
